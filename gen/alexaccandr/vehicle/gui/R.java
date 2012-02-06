@@ -11,10 +11,12 @@ public final class R {
     public static final class attr {
     }
     public static final class auth {
+        public static final int cancelButton=0x7f060006;
         public static final int company=0x7f060002;
         public static final int email=0x7f060003;
         public static final int first_name=0x7f060000;
         public static final int password=0x7f060004;
+        public static final int saveButton=0x7f060005;
         public static final int second_name=0x7f060001;
     }
     public static final class drawable {
@@ -35,8 +37,6 @@ public final class R {
     }
     public static final class id {
         public static final int add_new_vehicle=0x7f050000;
-        public static final int button1=0x7f050002;
-        public static final int button2=0x7f050003;
         public static final int linearLayout1=0x7f050001;
     }
     public static final class layout {

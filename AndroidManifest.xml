@@ -10,6 +10,7 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name" >
         <activity
+            android:configChanges="orientation|keyboardHidden|keyboard"
             android:label="@string/app_name"
             android:name=".MainActivity" >
             <intent-filter >
@@ -20,13 +21,16 @@
         </activity>
         
         <!--  All A/M page activity -->
-        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AllAMTab" />
+        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AllAMTab" 
+            android:configChanges="orientation|keyboardHidden|keyboard"/>
  
         <!--  New A/M page Activity -->
-        <activity android:name="alexaccandr.vehicle.gui.mainTabs.NewAMTab" />
+        <activity android:name="alexaccandr.vehicle.gui.mainTabs.NewAMTab" 
+            android:configChanges="orientation|keyboardHidden|keyboard"/>
  
         <!--  Accaunt page Activity -->
-        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AuthorizationTab" />
+        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AuthorizationTab" 
+            android:configChanges="orientation|keyboardHidden|keyboard"/>
     </application>
     
 

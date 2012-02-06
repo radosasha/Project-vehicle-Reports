@@ -4,10 +4,16 @@ import alexaccandr.vehicle.gui.mainTabs.AllAMTab;
 import alexaccandr.vehicle.gui.mainTabs.AuthorizationTab;
 import alexaccandr.vehicle.gui.mainTabs.NewAMTab;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.TabActivity;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.location.Address;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
@@ -16,11 +22,12 @@ import android.widget.TabHost.TabSpec;
 
 public class MainActivity extends TabActivity {
 	/** Called when the activity is first created. */
+	Context context;
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-
+		context = this;
 		/* TabHost will have Tabs */
 		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 
@@ -30,13 +37,12 @@ public class MainActivity extends TabActivity {
 		 * name to tab.
 		 */
 
-		/* tid1 is firstTabSpec Id. Its used to access outside. */
+		// добавить уникальные имена таба. для доступа outside
 		TabSpec TabAllAM = tabHost.newTabSpec("tid1");
 		TabSpec TabNewAM = tabHost.newTabSpec("tid2");
 		TabSpec TabAuth = tabHost.newTabSpec("tid3");
 
-		/* TabSpec setIndicator() is used to set name for the tab. */
-		/* TabSpec setContent() is used to set content for a particular tab. */
+		// назначить разметку для кнопок (Tabs)
 		TabAllAM.setIndicator("Все а/м",getResources().getDrawable(R.drawable.all_am_icon)).setContent(
 				new Intent(this, AllAMTab.class));
 		TabNewAM.setIndicator("Новые а/м",getResources().getDrawable(R.drawable.new_am_icon)).setContent(  
@@ -44,7 +50,7 @@ public class MainActivity extends TabActivity {
 		TabAuth.setIndicator("Аккаунт",getResources().getDrawable(R.drawable.account_icon)).setContent(
 				new Intent(this, AuthorizationTab.class)); 
 
-		/* Add tabSpec to the TabHost to display. */
+		/* Добавить Табы в TabHost для отображения. */
 		tabHost.addTab(TabAllAM); 
 		tabHost.addTab(TabNewAM);
 		tabHost.addTab(TabAuth);
@@ -60,6 +66,49 @@ public class MainActivity extends TabActivity {
 				toast("New Vehicle Clicked");
 			}
 		});
+	}
+	
+	// установить слушателя на кнопку "back"
+	@Override
+	public boolean dispatchKeyEvent(KeyEvent event) {
+		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
+			if (event.getAction() == KeyEvent.ACTION_DOWN
+					&& event.getRepeatCount() == 0) {
+				// вывод диалогового окна
+				mess(); 
+				return true;
+			} else if (event.getAction() == KeyEvent.ACTION_UP) {
+				if (event.isTracking() && !event.isCanceled()) {
+					return true;
+				}
+			}
+			return super.dispatchKeyEvent(event);
+		} else {
+			return super.dispatchKeyEvent(event);
+		}
+	}
+    
+    /*
+     * notify user he want to quit app 
+     */
+	void mess() {
+		
+		AlertDialog.Builder alertbox = new AlertDialog.Builder(context);
+		alertbox.setTitle("Выход из приложения");
+		alertbox.setMessage("Вы уверены что хотите выйти ?");
+		alertbox.setPositiveButton("Выйти",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+						System.exit(0);
+					}
+				});
+
+		alertbox.setNeutralButton("Отмена", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface arg0, int arg1) {
+				
+			}
+		});
+		alertbox.show();
 	}
 	
 	void toast(String msg){
