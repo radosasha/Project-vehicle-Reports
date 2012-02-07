@@ -87,12 +87,11 @@ public class MainActivity extends TabActivity {
 			return super.dispatchKeyEvent(event);
 		}
 	}
-    
-    /*
-     * notify user he want to quit app 
-     */
+
+	/*
+	 * notify user he want to quit app
+	 */
 	void mess() {
-		
 		AlertDialog.Builder alertbox = new AlertDialog.Builder(context);
 		alertbox.setTitle("Выход из приложения");
 		alertbox.setMessage("Вы уверены что хотите выйти ?");
@@ -103,15 +102,19 @@ public class MainActivity extends TabActivity {
 					}
 				});
 
-		alertbox.setNeutralButton("Отмена", new DialogInterface.OnClickListener() {
-			public void onClick(DialogInterface arg0, int arg1) {
-				
-			}
-		});
+		alertbox.setNeutralButton("Отмена",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+
+					}
+				});
 		alertbox.show();
 	}
-	
-	void toast(String msg){
+
+	void toast(String msg) {
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
 	}
+	
+
+	
 }

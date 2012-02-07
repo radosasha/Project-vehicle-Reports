@@ -1,0 +1,8 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+menu/add_new"
+        android:title="Добавить новый"
+        android:icon="@drawable/add_new_not_choosed" />
+    <item android:id="@+menu/download"
+        android:title="Загрузить"
+        android:icon="@drawable/add_new_not_choosed" />    
+</menu> 
