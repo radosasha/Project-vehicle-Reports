@@ -8,4 +8,9 @@
     <string name="auth_company">Компания</string>
     <string name="auth_email">E-mail</string>
 	<string name="auth_password">Пароль</string>
+	<string name="data_vin">VIN</string>
+	<string name="data_marka">Марка</string>
+	<string name="data_model">Модель</string>
+	<string name="data_odometer">Пробег, км</string>
+	<string name="data_comments">Комментарий</string>
 </resources>

@@ -21,16 +21,29 @@
         </activity>
         
         <!--  All A/M page activity -->
-        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AllAMTab" 
-            android:configChanges="orientation|keyboardHidden|keyboard"/>
+        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AllAMTab"/>
  
         <!--  New A/M page Activity -->
-        <activity android:name="alexaccandr.vehicle.gui.mainTabs.NewAMTab" 
-            android:configChanges="orientation|keyboardHidden|keyboard"/>
+        <activity android:name="alexaccandr.vehicle.gui.mainTabs.NewAMTab" />
  
         <!--  Accaunt page Activity -->
-        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AuthorizationTab" 
-            android:configChanges="orientation|keyboardHidden|keyboard"/>
+        <activity android:name="alexaccandr.vehicle.gui.mainTabs.AuthorizationTab"/>
+    
+        
+        
+        
+        <!-- data tab activity -->
+        <activity android:name="alexaccandr.vehicle.addVehicleTabs.AddVehicle"/>
+        
+        <!-- data tab activity -->
+        <activity android:name="alexaccandr.vehicle.addVehicleTabs.DataTab"/>
+ 
+        <!--  report state tab activity -->
+        <activity android:name="alexaccandr.vehicle.addVehicleTabs.StateReportTab" />
+ 
+        <!--  photo tab activity -->
+        <activity android:name="alexaccandr.vehicle.addVehicleTabs.PhotoTab"/>
+    
     </application>
     
 
