@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import alexaccandr.vehicle.addVehicleTabs.AddVehicle;
 import alexaccandr.vehicle.gui.R;
+import alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -89,6 +89,8 @@ public class NewAMTab extends Activity {
 		switch (item.getItemId()) {
 		case R.menu.add_new:
 			// Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
+			// передать номер таба
+			addReportIntent.putExtra("curtab", 0);
 			startActivityForResult(addReportIntent, RESULT_OK);
 			break;
 		case R.menu.download:

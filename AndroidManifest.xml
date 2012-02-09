@@ -33,18 +33,32 @@
         
         
         <!-- data tab activity -->
-        <activity android:name="alexaccandr.vehicle.addVehicleTabs.AddVehicle"/>
+        <activity android:name="alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle"/>
         
         <!-- data tab activity -->
-        <activity android:name="alexaccandr.vehicle.addVehicleTabs.DataTab"/>
+        <activity android:name="alexaccandr.vehicle.gui.addVehicleTabs.DataTab"/>
  
         <!--  report state tab activity -->
-        <activity android:name="alexaccandr.vehicle.addVehicleTabs.StateReportTab" />
+        <activity android:name="alexaccandr.vehicle.gui.addVehicleTabs.StateReportTab" />
  
         <!--  photo tab activity -->
-        <activity android:name="alexaccandr.vehicle.addVehicleTabs.PhotoTab"/>
+        <activity android:name=".addVehicleTabs.PhotoTab"/>
+        
+        <!--  photo tab activity -->
+        <activity 
+            android:label="@string/app_name"
+            android:name="alexaccandr.vehicle.camera.TakeAPhoto">
+            <intent-filter >
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     
     </application>
     
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
 
 </manifest>
