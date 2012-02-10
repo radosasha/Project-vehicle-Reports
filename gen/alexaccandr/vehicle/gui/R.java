@@ -9,18 +9,18 @@ package alexaccandr.vehicle.gui;
 
 public final class R {
     public static final class all_am {
-        public static final int list=0x7f0b0000;
+        public static final int list=0x7f0c0000;
     }
     public static final class attr {
     }
     public static final class auth {
-        public static final int cancelButton=0x7f0c0006;
-        public static final int company=0x7f0c0002;
-        public static final int email=0x7f0c0003;
-        public static final int first_name=0x7f0c0000;
-        public static final int password=0x7f0c0004;
-        public static final int saveButton=0x7f0c0005;
-        public static final int second_name=0x7f0c0001;
+        public static final int cancelButton=0x7f0d0006;
+        public static final int company=0x7f0d0002;
+        public static final int email=0x7f0d0003;
+        public static final int first_name=0x7f0d0000;
+        public static final int password=0x7f0d0004;
+        public static final int saveButton=0x7f0d0005;
+        public static final int second_name=0x7f0d0001;
     }
     public static final class camera {
         public static final int cancel=0x7f080002;
@@ -35,13 +35,13 @@ public final class R {
         public static final int white=0x7f040003;
     }
     public static final class data {
-        public static final int cancelButton=0x7f0d0006;
-        public static final int comments=0x7f0d0004;
-        public static final int marka=0x7f0d0001;
-        public static final int model=0x7f0d0002;
-        public static final int odometer=0x7f0d0003;
-        public static final int saveButton=0x7f0d0005;
-        public static final int vin=0x7f0d0000;
+        public static final int cancelButton=0x7f0e0006;
+        public static final int comments=0x7f0e0004;
+        public static final int marka=0x7f0e0001;
+        public static final int model=0x7f0e0002;
+        public static final int odometer=0x7f0e0003;
+        public static final int saveButton=0x7f0e0005;
+        public static final int vin=0x7f0e0000;
     }
     public static final class drawable {
         public static final int accaunt_not_choosed=0x7f020000;
@@ -74,19 +74,27 @@ public final class R {
         public static final int FrameLayout01=0x7f070001;
         public static final int SurfaceView01=0x7f070002;
         public static final int add_new_vehicle=0x7f070000;
+        public static final int check1=0x7f070007;
+        public static final int checkBox1=0x7f070008;
         public static final int linearLayout1=0x7f070003;
+        public static final int linearLayout2=0x7f070004;
+        public static final int linearLayout3=0x7f070006;
+        public static final int textView1=0x7f070005;
     }
     public static final class layout {
         public static final int add_vehicle=0x7f030000;
         public static final int camera_layout=0x7f030001;
         public static final int camera_second_layer=0x7f030002;
-        public static final int list_all_am=0x7f030003;
-        public static final int list_new_am=0x7f030004;
-        public static final int main=0x7f030005;
-        public static final int tab_all_am_layout=0x7f030006;
-        public static final int tab_auth_layout=0x7f030007;
-        public static final int tab_data_layout=0x7f030008;
-        public static final int tab_new_am_layout=0x7f030009;
+        public static final int complex=0x7f030003;
+        public static final int list_all_am=0x7f030004;
+        public static final int list_new_am=0x7f030005;
+        public static final int list_report_state=0x7f030006;
+        public static final int main=0x7f030007;
+        public static final int tab_all_am_layout=0x7f030008;
+        public static final int tab_auth_layout=0x7f030009;
+        public static final int tab_data_layout=0x7f03000a;
+        public static final int tab_new_am_layout=0x7f03000b;
+        public static final int tab_state_report_layout=0x7f03000c;
     }
     public static final class list_all_am {
         public static final int id1=0x7f090000;
@@ -100,13 +108,20 @@ public final class R {
         public static final int id2=0x7f0a0001;
         public static final int id3=0x7f0a0002;
     }
+    public static final class list_report_state {
+        public static final int id1=0x7f0b0000;
+        public static final int id2=0x7f0b0001;
+    }
     public static final class menu {
         public static final int add_new=0x7f060001;
         public static final int download=0x7f060002;
         public static final int menu=0x7f060000;
     }
     public static final class new_am {
-        public static final int list=0x7f0e0000;
+        public static final int list=0x7f0f0000;
+    }
+    public static final class state_report {
+        public static final int list=0x7f100000;
     }
     public static final class string {
         public static final int app_name=0x7f050001;

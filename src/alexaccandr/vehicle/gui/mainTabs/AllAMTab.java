@@ -23,9 +23,9 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class AllAMTab extends Activity {
 	// Контекст страницы
-	Context context;	
+	Context context;
 	// "намерение" вызова страницы создания нового отчета
-		Intent addReportIntent;
+	Intent addReportIntent;
 	// переменные списка
 	SimpleAdapter adapter = null;
 	List<HashMap<String, Object>> fillMaps = null;

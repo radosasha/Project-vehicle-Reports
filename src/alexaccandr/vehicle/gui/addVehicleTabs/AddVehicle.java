@@ -70,7 +70,7 @@ public class AddVehicle extends TabActivity {
 		});
 	}
 	
-	// установить слушателя на кнопку "back"
+	/*// установить слушателя на кнопку "back"
 	@Override
 	public boolean dispatchKeyEvent(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.KEYCODE_BACK) {
@@ -90,9 +90,9 @@ public class AddVehicle extends TabActivity {
 		}
 	}
 
-	/*
+	
 	 * notify user he want to quit app
-	 */
+	 
 	void mess() {
 		AlertDialog.Builder alertbox = new AlertDialog.Builder(context);
 		alertbox.setTitle("Отменить добавление отчета");
@@ -111,7 +111,7 @@ public class AddVehicle extends TabActivity {
 					}
 				});
 		alertbox.show();
-	}
+	}*/
 
 	void toast(String msg) {
 		Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();

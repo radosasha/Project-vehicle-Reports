@@ -45,15 +45,13 @@
         <activity android:name=".addVehicleTabs.PhotoTab"/>
         
         <!--  photo tab activity -->
-        <activity 
-            android:label="@string/app_name"
-            android:name="alexaccandr.vehicle.camera.TakeAPhoto">
-            <intent-filter >
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name="alexaccandr.vehicle.camera.TakeAPhoto"/>
+        
+        
+        <!-- state reports activities -->
+        <!--  complex activity -->
+        <activity android:name="alexaccandr.vehicle.gui.statereport.Complex"/>
+            
     
     </application>
     
