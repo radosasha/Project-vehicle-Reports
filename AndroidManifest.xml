@@ -66,14 +66,10 @@
         
         <!--  make photos list activity -->       
       <activity
-            android:configChanges="orientation|keyboardHidden|keyboard"
-            android:label="@string/app_name"
+           
+          
             android:name="alexaccandr.vehicle.gui.statereport.MakePhotos" >
-            <intent-filter >
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            
         </activity>
     
     </application>
