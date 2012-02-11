@@ -7,6 +7,8 @@ import java.util.Map;
 
 import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.statereport.Complex;
+import alexaccandr.vehicle.gui.statereport.Hierarchy1;
+import alexaccandr.vehicle.gui.statereport.SummerWinter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -79,11 +81,17 @@ public class StateReportTab extends Activity {
 				case OPTIONS:
 					Toast.makeText(context, "Options not work yet", Toast.LENGTH_SHORT).show();
 					break;
+				case EXTERNAL_INSPECTION:
+					startActivity(new Intent(context,Hierarchy1.class));
+					break;
+				case INTERNAL_INSPECTION:
+					startActivity(new Intent(context,Hierarchy1.class));
+					break;
 				case DIAGNOSTIC:
 					Toast.makeText(context, "Diagnostic not work yet", Toast.LENGTH_SHORT).show();
 					break;
 				case WHEELS_STATE:
-					//FIX
+					startActivity(new Intent(context,SummerWinter.class));
 				}
 			}
 		});
@@ -146,7 +154,7 @@ public class StateReportTab extends Activity {
 	 * тестовые наборы
 	 */
 	
-	// вернуть список элементов для первого уровня иерархии
+	/*// вернуть список элементов для первого уровня иерархии
 	List<HashMap<String, Object>> getExternalInspectionLevel() {
 		// заполнение списка
 		if (externalInspectionList != null)
@@ -234,5 +242,5 @@ public class StateReportTab extends Activity {
 		diagnostic.put("rowid1", R.drawable.photo_not_choosed);
 		internalInspectionList.add(diagnostic);
 		return internalInspectionList;
-	}
+	}*/
 }
