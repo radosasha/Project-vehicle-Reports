@@ -11,13 +11,19 @@ import java.util.Map;
 
 import alexaccandr.vehicle.camera.TakeAPhoto;
 import alexaccandr.vehicle.gui.R;
+import alexaccandr.vehicle.tools.FileSystem;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,12 +50,21 @@ public class MakePhotos extends Activity {
 	// Картинки
 	public static ImageView imageFirst;
 	public static ImageView imageSecond;
-	public static Bitmap bt1;
-	public static Bitmap bt2;
+	public static Bitmap bt1 = null;
+	public static Bitmap bt2 = null;
 	// "намерение" перейти на страницу "пункты"
 	Intent wheelPosition;
 	
+	// последняя выбранная неисправность
+	public String lastFault = null;
+	
+	// полоса прогресса
+	private ProgressDialog pd;
 
+	// список фотографий в папке
+	String[] photosList = null;
+	// директория папки с фотографиями
+	String directory = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -102,48 +117,92 @@ public class MakePhotos extends Activity {
 				// если был выбран первый пункт, ничего не делать
 				if(fault.equals("Не ОК")) return;
 				// получаем список всех фотографий
-				String directory = "/sdcard/CarMobile/Faults/"+fault;
+				directory = "/sdcard/CarMobile/Faults/"+fault;
 				File dir = new File(directory);
-				String [] photosList = dir.list();
-				System.gc();
-				
-				// возможна нехватка памяти
-				try {
-					switch (photosList.length) {
-					case 0:
-						Toast.makeText(context, "Фотографии отсутсвуют",
-								Toast.LENGTH_SHORT).show();
-						break;
-					case 1:
-
-						bt1 = decodeFile(new File(directory, photosList[0]));
-						// Bitmap bt0 = decodeFile(new
-						// File(directory,photosList[0]));
-						imageFirst.setImageBitmap(bt1);
-						break;
-					case 2:
-						// BitmapFactory.Options options = new
-						// BitmapFactory.Options();
-						// options.inTempStorage = new byte[16*1024];
-						bt1 = decodeFile(new File(directory, photosList[0]));
-						bt2 = decodeFile(new File(directory, photosList[1]));
-						// bt =
-						// BitmapFactory.decodeFile(directory+"/"+photosList[1],options);
-						// imageFirst.setImageBitmap(BitmapFactory.decodeFile(directory+"/"+photosList[0]));
-						imageFirst.setImageBitmap(bt1);
-						imageSecond.setImageBitmap(bt2);
-					}
-				} catch (Exception e) {
-					Toast.makeText(context,
-							"Ошибка. Недостаточно памяти для отображения.",
-							Toast.LENGTH_SHORT).show();
-				}
+				photosList = dir.list();
+				// предворительно очищаем буфер приложения
+				lastFault = fault;
 				clearMemory(bt1);
 				clearMemory(bt2);
+				// чистим картинки
+				clearImages();
 				System.gc();
+				// запускаем полосу прогресса
+				pd = ProgressDialog.show(context, "Загружаем фото",
+						"Загрузка из памяти телефона...", true, false);
+				Thread thread = new Thread(null, runProgress);
+				thread.start();
 			}
 		});
 	}
+	
+	/*
+	 * подгрузка картинок из памяти телефона или SD карты
+	 */
+	void loadImages(){
+			switch (photosList.length) {
+			case 0:
+				
+				break;
+			case 1:
+				bt1 = decodeFile(new File(directory, photosList[0]));
+				//imageFirst.setImageBitmap(bt1);
+				break;
+			case 2:				
+				bt1 = decodeFile(new File(directory, photosList[0]));
+				bt2 = decodeFile(new File(directory, photosList[1]));				
+				//imageFirst.setImageBitmap(bt1);
+				//imageSecond.setImageBitmap(bt2);
+			}
+	}
+
+	private Runnable runProgress = new Runnable() {
+		@Override
+		public void run() {
+			Message msg = new Message();
+			Bundle bd = new Bundle();
+			try {
+				loadImages();
+				bd.putInt("msg", 0);
+				msg.setData(bd);
+				reportHandler.sendMessage(msg);
+			} catch (Exception e) {
+				e.printStackTrace();
+				bd.putInt("msg", 1);
+				msg.setData(bd);
+				reportHandler.sendMessage(msg);
+			}
+		}
+	};
+	
+	private Handler reportHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			int command = msg.getData().getInt("msg");
+			switch (command) {
+			case 0:
+				switch(photosList.length){
+				case 0:
+					Toast.makeText(context, "Фотографии отсутсвуют",
+							Toast.LENGTH_SHORT).show();
+				case 1:
+					imageFirst.setImageBitmap(bt1);
+					break;
+				case 2:
+					imageFirst.setImageBitmap(bt1);
+					imageSecond.setImageBitmap(bt2);
+				}
+				// do nothing
+				break;
+			case 1:
+				Toast.makeText(context,
+						"Ошибка. Недостаточно памяти для отображения.",
+						Toast.LENGTH_SHORT).show();
+
+			}
+			pd.dismiss();
+		}
+	};
 	
 	/*
 	 * очищаем память
@@ -154,6 +213,13 @@ public class MakePhotos extends Activity {
 			bt = null;
 			System.gc();
 		}
+	}
+
+	void clearImages() {
+		if (imageFirst != null)
+			imageFirst.setImageBitmap(null);
+		if (imageSecond != null)
+			imageSecond.setImageBitmap(null);
 	}
 	
 	//decodes image and scales it to reduce memory consumption
@@ -180,8 +246,10 @@ public class MakePhotos extends Activity {
 	    return null;
 	}
 
-	
-	public void gogo(View v) {
+	/*
+	 * слушатель на нажатей иконку "сделать фото"
+	 */
+	public void makePhoto(View v) {
 		// получим ссылку на родительскую разметку (поднимемся на 3 уровня)
 		LinearLayout parentLayout = (LinearLayout) v.getParent().getParent()
 				.getParent();
@@ -211,7 +279,7 @@ public class MakePhotos extends Activity {
 					// извлекаем имя введенной неисправности
 					String faultName = et.getText().toString();
 					// проверяем. существует ли неисправность с таким именем
-					if(isItemExist(faultName)){
+					if(isItemExist(faultName) == 0 ){
 						dialog.cancel();
 						Toast.makeText(context, "Неисправность '"+faultName+"' уже существует в списке", Toast.LENGTH_LONG).show();
 						return;
@@ -290,12 +358,14 @@ public class MakePhotos extends Activity {
 	 * @return true, если в списке неисправностей уже есть такое имя, иначе
 	 * false
 	 */
-	boolean isItemExist(String name) {
+	int isItemExist(String name) {
+		int count = 0;
 		for (HashMap<String, Object> item : fillMaps) {
 			if (item.get("rowid0").equals(name))
-				return true;
+				return count;
+			count++;
 		}
-		return false;
+		return count;
 	}
 	
 	/*@Override
@@ -317,6 +387,56 @@ public class MakePhotos extends Activity {
         ((ViewGroup) view).removeAllViews();
         }
     }*/
+	
+	/*
+	 * слушатель на нажатей иконку "сделать фото"
+	 */
+	public void removePhoto(View v) {
 
+		LinearLayout parentLayout = (LinearLayout) v.getParent().getParent()
+				.getParent();
+		// извлекаем текст из поля "неисправность"
+		TextView tv = (TextView) parentLayout
+				.findViewById(R.makephoto.errortext);
+		final String fault = tv.getText().toString();
+		Log.e("text", fault);
+		if(fault.equals("Не ОК"))return;
+
+		AlertDialog.Builder alertbox = new AlertDialog.Builder(context);
+		alertbox.setTitle("Удалить");
+		alertbox.setMessage("Вы уверены что хотите удалить неисправность '"
+				+ fault + "' ?");
+		alertbox.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+			public void onClick(DialogInterface arg0, int arg1) {
+				int numb = isItemExist(fault);
+				if (numb == 0) {
+					Toast.makeText(context, "Ошибка при удалении из списка",
+							Toast.LENGTH_LONG).show();
+					return;
+				}
+				fillMaps.remove(numb);
+				adapter.notifyDataSetChanged();
+				if (fault.equals(lastFault)) {
+					clearImages();
+				}
+				try {
+					FileSystem.deleteFolder(new File(
+							"/sdcard/CarMobile/Faults/" + fault + ""));
+				} catch (Exception e) {
+					Toast.makeText(context, "Ошибка при удалении файлов",
+							Toast.LENGTH_LONG).show();
+				}
+			}
+		});
+
+		alertbox.setNeutralButton("Отмена",
+				new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface arg0, int arg1) {
+
+					}
+				});
+		alertbox.show();
+
+	}
 
 }
