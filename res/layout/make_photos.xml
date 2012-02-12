@@ -2,7 +2,9 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:id="@+makephotos/rootview"
+    >
 
     <TextView 
         android:layout_width="wrap_content"
@@ -43,9 +45,10 @@
             android:layout_weight="1" >
 
             <ImageView
+                android:id="@+image/first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/vehicle1" />
+                 />
         </LinearLayout>
 
         <LinearLayout
@@ -58,9 +61,10 @@
             android:layout_weight="1">
 
             <ImageView
+                android:id="@+image/second"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/vehicle2" />
+                 />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

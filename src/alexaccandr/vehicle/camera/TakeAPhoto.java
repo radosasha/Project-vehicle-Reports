@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.ViewGroup.LayoutParams;
@@ -28,6 +29,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Random;
 import java.util.Set;
 
 public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
@@ -47,6 +49,13 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 	LinkedList<HashMap<String, Integer>> tags;
 	HashMap<String, Integer> tagss;
 	String[] allTags;
+	
+	// номер комманды 
+	// 0 - камера фотографирует в раздел "Фото"
+	// 1 - камера фотографирует в раздел "Внутренний/Внешний осмотр"
+	int command;
+	// директория для сохранения фото
+	String dir;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -78,22 +87,14 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 		// сделать видимой только кнопку для создания фотографий
 		buttonsVisible(1);
 
-		// доступные метки
-		// параметр String - наименования меток
-		// параметр Integer - счетчик использованных меток
-		HashMap<String, Integer> t1 = new HashMap<String, Integer>();
-		t1.put("Вид спереди", 1);
-		HashMap<String, Integer> t2 = new HashMap<String, Integer>();
-		t2.put("Вид сзади", 1);
-		HashMap<String, Integer> t3 = new HashMap<String, Integer>();
-		t3.put("Вид салона ч/з пассажирскую дверь", 1);
-		HashMap<String, Integer> t4 = new HashMap<String, Integer>();
-		t4.put("без метки", 3);
-		tags = new LinkedList<HashMap<String, Integer>>();
-		tags.add(t1);
-		tags.add(t2);
-		tags.add(t3);
-		tags.add(t4);
+		// извлекаем номер команды из намерения
+		Intent ite = getIntent();
+		command = ite.getExtras().getInt("cmnd");
+		// извлекаем директорию для сохнанения фото
+		dir = ite.getExtras().getString("dir");
+		
+		// инициализируем поле с метками 
+		if(command == 0) inic();
 	}
 
 	// при возвращении в окно - включить камеру
@@ -176,24 +177,49 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 	}
 
 	// слушатель на нажатие кнопки
+	// количество сделанный фото в разделе "осмотр"
+	int count;
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		
 		// сделать фото
 		case R.camera.takeaphoto:
-			if(tags.size() == 0) {
-				Toast.makeText(context, "Все метки заполнены", Toast.LENGTH_SHORT).show();
+			switch (command) {
+			// для раздела "фото"
+			case 0:
+				if (tags.size() == 0) {
+					Toast.makeText(context, "Все метки заполнены", Toast.LENGTH_SHORT).show();
+					break;
+				}
+				camera.autoFocus(this);
+				break;
+			// для раздела "осмотр"
+			case 1:
+				// если уже сделано 2 фото, запретим дальнейшую съемку
+				File directory = new File(dir);
+				count = directory.list().length;
+				if(count >= 2){
+					Toast.makeText(context, "Достигнут предел фотографий(2 фото) для данной неисправности", Toast.LENGTH_LONG).show();
+					break;
+				}
+				// сделано менее 2 фото, разрешаем съемку
+				camera.autoFocus(this);
 				break;
 			}
-			camera.autoFocus(this);
 			break;
+			
 		// сохранить
 		case R.camera.save:
+			// вызвать предварительное меню для сохранения
 			savePic();
+			// выставить кнопки по умолчанию
 			returnOriginal();
 			break;
+			
 		// отмена
 		case R.camera.cancel:
+			// выставить кнопки по умолчанию
 			returnOriginal();
 		}
 	}
@@ -222,23 +248,22 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 		// paramCamera.startPreview();
 	}
 
+	// метод для сохранения фото по указанной директории
 	void savePic() {
-		// пока сохраняем полученные jpg в папке /sdcard/CarMobile
-		// имя файла - System.currentTimeMillis()
-		createTypeDialog();
-		/*try {
-			File saveDir = new File("/sdcard/CarMobile/");
-			if (!saveDir.exists()) {
-				saveDir.mkdirs();
-			}
-			FileOutputStream os = new FileOutputStream(String.format(
-					"/sdcard/CarMobile/%d.jpg", System.currentTimeMillis()));
-			os.write(paramArrayOfByte);
-			os.close();
-		} catch (Exception e) {
-			// FIX
-			// обработка нехватки память на SD карте
-		}*/
+		// в соответвии с командой будут предоставлены различные инструкции		
+		switch(command){
+		// инструкции по сохранению в раздел "Фото"
+		case 0:
+			createTypeDialog();		
+			break;
+		// инструкции по сохранению в раздел "Осмотр"
+		case 1:
+			savePictureToDir("Photo"+(new Random().nextInt(1000000)));
+		}
+	}
+
+	private void inspectionSection() {
+		
 	}
 
 	// меняет видимость кнопок "сделать фото", "сохнанить", "отмена"
@@ -277,7 +302,9 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 
 	}
 
-	// предложить список метод для сохранения в соответствующую категорию
+	// метод вызывает диалоговое окно со списком доступных меток
+	// по выбору одной из меток, удаляем её из списка доступных в соответсвии со значением счетчика
+	// получаем название фото, сохраняем её, либо уведомляем пользователя о лимите фотографий если все метки уже заняты
 	void createTypeDialog() {
 
 		// получить доступные метки
@@ -285,17 +312,22 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 		// инициализация списка
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		// собрать заголовок
-
 		builder.setTitle("Добавить метку");
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 			public void onClick(DialogInterface dialog, int item) {
 				Entry<String,Integer> es =tags.get(item).entrySet().iterator().next();
+				// получаем значение счетчика
 				int count = es.getValue();
+				// если значение счетчика достигает нуля, удаляем метку из списка доступных
+				// сохраняем фотографию 
 				if(--count == 0){
-					tags.remove(item);
+					//при удачном сохранении фотографии удаляем метку
+					// название фотографии состоит из названия метки + счетчик
+					if(savePictureToDir(es.getKey()))tags.remove(item);					
 				}
 				else{
-					es.setValue(--count);
+					//(для "без меток") иначе уменьшим счетчик  и сохраним фотографию
+					if(savePictureToDir(es.getKey()+count))	es.setValue(count);
 				}
 			}
 			// FIX
@@ -303,9 +335,37 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 			// Intent cameraIntent = new
 			// Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
 			// context.startActivity(cameraIntent);
-
 		});
 		builder.show();
+	}
+	
+	// созраняем фото по указанной директории
+	boolean savePictureToDir(String fileName) {
+		try {
+			// создаем директорию если отсутсвует
+			File saveDir = new File(dir);
+			
+			if (!saveDir.exists()) {
+				// тестовая переменная
+				boolean res = saveDir.mkdirs();
+				Log.e("Директория ".concat(dir),res+"");
+			}
+			// конечная директория файла
+			// имя файла - System.currentTimeMillis()
+			//FileOutputStream os = new FileOutputStream(String.format(
+					//dir+"%d.jpg", System.currentTimeMillis()));
+			String fullDir = dir+(fileName+".jpg").replace(" ", "_");
+			FileOutputStream os = new FileOutputStream(fullDir);			
+			os.write(paramArrayOfByte);
+			os.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			// FIX
+			// обработка нехватки память на SD карте
+			Toast.makeText(context, "Ошибка при сохранении фотографии", Toast.LENGTH_LONG).show();
+			return false;
+		}
+		return true;
 	}
 
 	// получить массив доступных меток
@@ -319,5 +379,25 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 					.getKey();
 		}
 		return items;
+	}
+	
+	// инициализация
+	void inic() {
+		// доступные метки
+		// параметр String - наименования меток
+		// параметр Integer - счетчик использованных меток
+		HashMap<String, Integer> t1 = new HashMap<String, Integer>();
+		t1.put("Вид спереди", 1);
+		HashMap<String, Integer> t2 = new HashMap<String, Integer>();
+		t2.put("Вид сзади", 1);
+		HashMap<String, Integer> t3 = new HashMap<String, Integer>();
+		t3.put("Вид салона ч.з пассажирскую дверь", 1);
+		HashMap<String, Integer> t4 = new HashMap<String, Integer>();
+		t4.put("Без метки", 3);
+		tags = new LinkedList<HashMap<String, Integer>>();
+		tags.add(t1);
+		tags.add(t2);
+		tags.add(t3);
+		tags.add(t4);
 	}
 }

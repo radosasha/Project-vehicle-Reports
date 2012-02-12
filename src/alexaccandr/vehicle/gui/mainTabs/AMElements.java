@@ -48,8 +48,10 @@ public class AMElements extends Activity{
 		    		context.startActivity(stateRep);
 		    		break;
 		    	// добавить фотографии
-		    	case 1:
+		    	case 1:		    		
 		    		photos = new Intent(context, TakeAPhoto.class);
+		    		photos.putExtra("cmnd", 0);
+		    		photos.putExtra("dir", "/sdcard/CarMobile/Photo/");
 		    		context.startActivity(photos);
 		    		break;
 		    	// дублировать автомобиль
