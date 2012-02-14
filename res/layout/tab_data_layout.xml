@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#FFFFFF"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:paddingTop="20dp" >
+
+        <EditText
+            android:id="@+data/vin"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/data_vin"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+data/marka"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/data_marka"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+data/model"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/data_model"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+data/odometer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/data_odometer"
+            android:inputType="number" />
+
+        <EditText
+            android:id="@+data/comments"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/data_comments"
+            android:inputType="text" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom" >
+
+            <LinearLayout
+                android:id="@+id/linearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingBottom="20dp" >
+
+                <Button
+                    android:id="@+data/saveButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="120dp"
+                    android:text="Сохранить" />
+
+                <Button
+                    android:id="@+data/cancelButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="120dp"
+                    android:text="Отмена" />
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

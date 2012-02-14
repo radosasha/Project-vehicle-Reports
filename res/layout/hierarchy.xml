@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#000000"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Car"
+                    android:textColor="#FFD700"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="mobile"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_new_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/add_new_vehicle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Добавить новый"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </LinearLayout>
+       
+    <LinearLayout
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_width="fill_parent"
+   		android:layout_height="wrap_content"
+   		android:gravity="center"
+   		android:background="#DDDDDD"
+         >
+         <TextView 
+              android:layout_width="wrap_content"
+   			android:layout_height="match_parent"
+   			android:id="@+wheels/text"
+   			android:textSize="20dp"
+   			android:textColor="#000000"
+             />        
+    </LinearLayout>
+    <ListView
+        android:background="#FFFFFF"
+        android:id="@+wheels/list"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:dividerHeight="10dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:paddingTop="10dp" 
+        android:divider="@drawable/list_divider">
+    </ListView>
+
+</LinearLayout>
