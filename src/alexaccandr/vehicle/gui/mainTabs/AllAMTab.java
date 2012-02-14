@@ -7,9 +7,12 @@ import java.util.Map;
 
 import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle;
+import alexaccandr.vehicle.photo.PhotoEditor;
+import alexaccandr.vehicle.tools.ApplicationMemory;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -23,7 +26,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class AllAMTab extends Activity {
 	// Контекст страницы
-	Context context;
+	Activity context;
 	// "намерение" вызова страницы создания нового отчета
 	Intent addReportIntent;
 	// переменные списка
@@ -99,5 +102,15 @@ public class AllAMTab extends Activity {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.menu, menu);
 		return true;
+	}
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// чистим память 
+				if(PhotoEditor.allPhotosStructure != null){
+					for(int i=0;i<PhotoEditor.allPhotosStructure.size();i++){
+						ApplicationMemory.eraseBitmapBuffer((Bitmap) PhotoEditor.allPhotosStructure.get(i).get(2));
+					}
+				}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

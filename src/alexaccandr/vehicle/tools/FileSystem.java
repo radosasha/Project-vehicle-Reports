@@ -11,4 +11,9 @@ public class FileSystem {
 				deleteFolder(child);
 		fileOrDirectory.delete();
 	}
+	
+	// возвращает список всех файлов по указанной директории
+	public static String[] getFilesList(String inDir){
+		return new File(inDir).list();
+	}
 }

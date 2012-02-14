@@ -4,6 +4,7 @@ import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.mainTabs.AllAMTab;
 import alexaccandr.vehicle.gui.mainTabs.AuthorizationTab;
 import alexaccandr.vehicle.gui.mainTabs.NewAMTab;
+import alexaccandr.vehicle.photo.PhotoEditor;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.TabActivity;
@@ -43,13 +44,20 @@ public class AddVehicle extends TabActivity {
 		TabSpec TabStateReport = tabHost.newTabSpec("tid2");
 		TabSpec TabPhoto = tabHost.newTabSpec("tid3");
 
-		// назначить разметку для кнопок (Tabs)
+		// реакцию на нажатия таба
+		// таб "данные"
 		TabData.setIndicator("Данные",getResources().getDrawable(R.drawable.data_icon)).setContent(
 				new Intent(this, DataTab.class));
+		// таб "отчет о состоянии"
 		TabStateReport.setIndicator("Отчет о состоянии",getResources().getDrawable(R.drawable.state_icon)).setContent(  
 				new Intent(this, StateReportTab.class));
-		TabPhoto.setIndicator("Фото",getResources().getDrawable(R.drawable.photo_icon)).setContent(
-				new Intent(this, PhotoTab.class)); 
+		// таб "фото"
+		// при загрузке таба - отправляет команду "0" классу "PhotoEditor" для загрузки основных фотографий
+		// для загрузки фотографий в разделах "осмотр" будет отправлена комманда "1"
+		Intent it = new Intent(this, PhotoEditor.class);
+		it.putExtra("cmnd", 0);
+		it.putExtra("dir", "/sdcard/CarMobile/Photo/");
+		TabPhoto.setIndicator("Фото",getResources().getDrawable(R.drawable.photo_icon)).setContent(it); 
 
 		/* Добавить Табы в TabHost для отображения. */
 		tabHost.addTab(TabData); 
@@ -59,7 +67,7 @@ public class AddVehicle extends TabActivity {
 		// установить текущий таб
 		tabHost.setCurrentTab(getIntent().getExtras().getInt("curtab"));
 
-		LinearLayout addNewVehicle = (LinearLayout)findViewById(R.id.add_new_vehicle);		
+		/*LinearLayout addNewVehicle = (LinearLayout)findViewById(R.id.add_new_vehicle);		
 		// слушатель на кнопку "Добавить новый"
 		addNewVehicle.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -67,8 +75,10 @@ public class AddVehicle extends TabActivity {
 				// FIX
 				toast("New Vehicle Clicked");
 			}
-		});
+		});*/
 	}
+	
+
 	
 	/*// установить слушателя на кнопку "back"
 	@Override

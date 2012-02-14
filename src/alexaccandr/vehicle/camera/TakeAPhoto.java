@@ -95,6 +95,7 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 		
 		// инициализируем поле с метками 
 		if(command == 0) inic();
+		
 	}
 
 	// при возвращении в окно - включить камеру
@@ -260,10 +261,6 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 		case 1:
 			savePictureToDir("Photo"+(new Random().nextInt(1000000)));
 		}
-	}
-
-	private void inspectionSection() {
-		
 	}
 
 	// меняет видимость кнопок "сделать фото", "сохнанить", "отмена"

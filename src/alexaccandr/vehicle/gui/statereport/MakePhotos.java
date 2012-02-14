@@ -11,7 +11,9 @@ import java.util.Map;
 
 import alexaccandr.vehicle.camera.TakeAPhoto;
 import alexaccandr.vehicle.gui.R;
+import alexaccandr.vehicle.tools.ApplicationMemory;
 import alexaccandr.vehicle.tools.FileSystem;
+import alexaccandr.vehicle.tools.Image;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -21,6 +23,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -122,11 +125,11 @@ public class MakePhotos extends Activity {
 				photosList = dir.list();
 				// предворительно очищаем буфер приложения
 				lastFault = fault;
-				clearMemory(bt1);
-				clearMemory(bt2);
-				// чистим картинки
-				clearImages();
+				ApplicationMemory.eraseBitmapBuffer(bt1);
+				ApplicationMemory.eraseBitmapBuffer(bt2);
 				System.gc();
+				// чистим картинки
+				clearImages();				
 				// запускаем полосу прогресса
 				pd = ProgressDialog.show(context, "Загружаем фото",
 						"Загрузка из памяти телефона...", true, false);
@@ -145,12 +148,12 @@ public class MakePhotos extends Activity {
 				
 				break;
 			case 1:
-				bt1 = decodeFile(new File(directory, photosList[0]));
+				bt1 = Image.decodeFile(new File(directory, photosList[0]));
 				//imageFirst.setImageBitmap(bt1);
 				break;
-			case 2:				
-				bt1 = decodeFile(new File(directory, photosList[0]));
-				bt2 = decodeFile(new File(directory, photosList[1]));				
+			case 2:	
+				bt1 = Image.decodeFile(new File(directory, photosList[0]));
+				bt2 = Image.decodeFile(new File(directory, photosList[1]));				
 				//imageFirst.setImageBitmap(bt1);
 				//imageSecond.setImageBitmap(bt2);
 			}
@@ -162,11 +165,15 @@ public class MakePhotos extends Activity {
 			Message msg = new Message();
 			Bundle bd = new Bundle();
 			try {
+				// зугрузить фото из памяти телефона
 				loadImages();
+				// отправить сообщение об удачной загрузке фото
 				bd.putInt("msg", 0);
 				msg.setData(bd);
 				reportHandler.sendMessage(msg);
+
 			} catch (Exception e) {
+				// вывести сообщене об ошибке при загрузке
 				e.printStackTrace();
 				bd.putInt("msg", 1);
 				msg.setData(bd);
@@ -182,9 +189,11 @@ public class MakePhotos extends Activity {
 			switch (command) {
 			case 0:
 				switch(photosList.length){
+				// в
 				case 0:
 					Toast.makeText(context, "Фотографии отсутсвуют",
 							Toast.LENGTH_SHORT).show();
+					break;
 				case 1:
 					imageFirst.setImageBitmap(bt1);
 					break;
@@ -198,23 +207,14 @@ public class MakePhotos extends Activity {
 				Toast.makeText(context,
 						"Ошибка. Недостаточно памяти для отображения.",
 						Toast.LENGTH_SHORT).show();
-
 			}
 			pd.dismiss();
 		}
 	};
 	
-	/*
-	 * очищаем память
-	 */
-	void clearMemory(Bitmap bt) {
-		if (bt != null) {
-			bt.recycle();
-			bt = null;
-			System.gc();
-		}
-	}
+	
 
+	// убрать картинки с экрана
 	void clearImages() {
 		if (imageFirst != null)
 			imageFirst.setImageBitmap(null);
@@ -222,29 +222,6 @@ public class MakePhotos extends Activity {
 			imageSecond.setImageBitmap(null);
 	}
 	
-	//decodes image and scales it to reduce memory consumption
-	private Bitmap decodeFile(File file){
-	    try {
-	        //Decode image size
-	        BitmapFactory.Options opt = new BitmapFactory.Options();
-	        opt.inJustDecodeBounds = true;
-	        BitmapFactory.decodeStream(new FileInputStream(file),null,opt);
-
-	        //The new size we want to scale to
-	        final int REQUIRED_SIZE=400;
-
-	        //Find the correct scale value. It should be the power of 2.
-	        int scale=1;
-	        while(opt.outWidth/scale/2>=REQUIRED_SIZE && opt.outHeight/scale/2>=REQUIRED_SIZE)
-	            scale*=2;
-
-	        //Decode with inSampleSize
-	        BitmapFactory.Options o2 = new BitmapFactory.Options();
-	        o2.inSampleSize=scale;
-	        return BitmapFactory.decodeStream(new FileInputStream(file), null, o2);
-	    } catch (FileNotFoundException e) {}
-	    return null;
-	}
 
 	/*
 	 * слушатель на нажатей иконку "сделать фото"
@@ -436,7 +413,5 @@ public class MakePhotos extends Activity {
 					}
 				});
 		alertbox.show();
-
 	}
-
 }

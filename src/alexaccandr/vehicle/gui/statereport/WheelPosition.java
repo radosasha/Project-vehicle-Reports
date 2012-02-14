@@ -36,7 +36,7 @@ public class WheelPosition extends Activity {
 		setContentView(R.layout.wheels_position_layout);
 		// ссылка на контекст
 		context = this;
-		wheelPosition = new Intent(context, WheelPosition.class);
+		wheelPosition = new Intent(context, WheelsState.class);
 
 		// получаем ссылку на заголовок
 		head = (TextView) findViewById(R.wheels.text);
@@ -88,26 +88,27 @@ public class WheelPosition extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// выбран пункт
-				switch (arg2) {
+				/*switch (arg2) {
 				// лето
-				case 0:
-					wheelPosition.putExtra("item", 0);
-					startActivity(wheelPosition);
-					break;
-				// зима
+				case 0:*/
+					wheelPosition.putExtra("item", arg2);					
+					//break;
+				/*// зима
 				case 1:
 					wheelPosition.putExtra("item", 1);
-					startActivity(wheelPosition);
+					//startActivity(wheelPosition);
 					// лето
 				case 2:
 					wheelPosition.putExtra("item", 2);
-					startActivity(wheelPosition);
+					//startActivity(wheelPosition);
 					break;
 				// зима
 				case 3:
 					wheelPosition.putExtra("item", 3);
-					startActivity(wheelPosition);
-				}
+					//startActivity(wheelPosition);
+					break;
+				}*/
+				startActivity(wheelPosition);
 			}
 		});
 	}

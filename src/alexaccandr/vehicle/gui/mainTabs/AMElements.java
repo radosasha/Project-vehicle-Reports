@@ -18,13 +18,13 @@ import android.widget.Toast;
  */
 public class AMElements extends Activity{
 	// контекст вызывающего класса
-	Context context;
+	Activity context;
 	// намерение "добавить фото
 	Intent photos;
 	// намерение "добавить отчет о состоянии"
 	Intent stateRep;
 	
-	public AMElements(Context context) {
+	public AMElements(Activity context) {
 		this.context = context;		
 	}
 	
@@ -45,7 +45,7 @@ public class AMElements extends Activity{
 		    		stateRep = new Intent(context, AddVehicle.class);
 		    		// передать номер таба
 		    		stateRep.putExtra("curtab", 1);
-		    		context.startActivity(stateRep);
+		    		context.startActivityForResult(stateRep,0);
 		    		break;
 		    	// добавить фотографии
 		    	case 1:		    		

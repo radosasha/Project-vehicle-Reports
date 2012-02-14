@@ -7,11 +7,14 @@ import java.util.Map;
 
 import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle;
+import alexaccandr.vehicle.photo.PhotoEditor;
+import alexaccandr.vehicle.tools.ApplicationMemory;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -25,7 +28,7 @@ import android.widget.Toast;
 
 public class NewAMTab extends Activity {
 	// Контекст страницы
-	Context context;
+	Activity context;
 	// "намерение" вызова страницы создания нового отчета
 	Intent addReportIntent;
 	// константы результата
@@ -104,12 +107,18 @@ public class NewAMTab extends Activity {
 	 */
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		switch (resultCode) {
+		/*switch (resultCode) {
 		case RESULT_OK:
 			Toast.makeText(context, "Добавлен новый отчет", Toast.LENGTH_LONG).show();
 			break;
 		case RESULT_CANCEL:
 			Toast.makeText(context, "Создание отчета отменено", Toast.LENGTH_LONG).show();
+		}*/
+		// чистим память 
+		if(PhotoEditor.allPhotosStructure != null){
+			for(int i=0;i<PhotoEditor.allPhotosStructure.size();i++){
+				ApplicationMemory.eraseBitmapBuffer((Bitmap) PhotoEditor.allPhotosStructure.get(i).get(2));
+			}
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 	}
