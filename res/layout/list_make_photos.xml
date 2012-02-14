@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/my_drawable"
+    android:orientation="horizontal"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="10dp" 
+    android:paddingBottom="10dp" 
+    android:gravity="center"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:orientation="vertical" >
+
+            <TextView
+                android:id="@+makephoto/errortext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Не ОК"
+                android:textColor="#000000"
+                android:textSize="20dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:minWidth="40dp" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:minWidth="40dp" >
+
+           
+            <ImageView
+                android:adjustViewBounds="true"
+                android:id="@+makephoto/photo1"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_icon" 
+                android:paddingRight="10dp"
+                android:clickable="true"
+                android:onClick="makePhoto"
+                />
+             <ImageView
+                 android:adjustViewBounds="true"
+                 android:id="@+makephoto/photo2"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/account_icon"
+                android:clickable="true"
+                android:onClick="removePhoto"
+                 />
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
