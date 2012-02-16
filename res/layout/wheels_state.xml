@@ -3,17 +3,73 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:layout_gravity="center"
-    android:background="#FFFFFF"
+    android:background="#000000"
     android:gravity="center"
     android:orientation="vertical"
-    android:paddingLeft="10dp"
-    android:paddingRight="10dp"
-    android:paddingTop="5dp" >
+    >
 
+     <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:background="#000000"
+            android:orientation="horizontal"
+            android:paddingBottom="10dp"
+            android:paddingTop="10dp" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:layout_gravity="right"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Car"
+                    android:textColor="#FFD700"
+                    android:textSize="25dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="mobile"
+                    android:textSize="25dp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/add_new_vehicle"
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:clickable="true"
+                android:orientation="horizontal" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:src="@drawable/add_new_vehicle" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Добавить новый"
+                    android:textSize="15dp" />
+            </LinearLayout>
+        </LinearLayout>
     <ScrollView
+        android:background="#FFFFFF"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.1" >
+        android:layout_weight="0.1" 
+         android:paddingLeft="10dp"
+    	android:paddingRight="10dp"
+   	 android:paddingTop="5dp"
+        >
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -23,47 +79,113 @@
             <TextView
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="#DDDDDD"
-                android:gravity="center"
                 android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
                 android:paddingTop="5dp"
                 android:text="Марка шины"
                 android:textColor="#000000"
                 android:textSize="15dp" />
 
-            <Spinner
-                android:id="@+wheelsstate/spinner"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:tag="ffff" />
-
             <EditText
-                android:id="@+wheelsstate/size"
+                android:id="@+wheelsstate/marka"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Размерность"
                 android:inputType="textPersonName" >
             </EditText>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Размерность"
+                android:textColor="#000000"
+                android:textSize="15dp" />
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+
+                <EditText
+                    android:id="@+wheelsstate/size1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName" >
+                </EditText>
+
+                <EditText
+                    android:id="@+wheelsstate/size2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName" >
+                </EditText>
+
+                <EditText
+                    android:id="@+wheelsstate/size3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName" >
+                </EditText>
+
+                <EditText
+                    android:id="@+wheelsstate/size4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName" >
+                </EditText>
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Высота проректора, мм"
+                android:textColor="#000000"
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+wheelsstate/height"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Высота проректора, мм"
                 android:inputType="textPersonName" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Диск, мм"
+                android:textColor="#000000"
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+wheelsstate/disk"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Диск, мм"
                 android:inputType="textPersonName" />
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Износ колодки, %"
+                android:textColor="#000000"
+                android:textSize="15dp" />
 
             <EditText
                 android:id="@+wheelsstate/iznos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Износ колодки, %"
                 android:inputType="textPersonName" />
         </LinearLayout>
     </ScrollView>
@@ -76,6 +198,7 @@
         android:gravity="bottom" >
 
         <LinearLayout
+            android:background="#FFFFFF"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:gravity="center" >

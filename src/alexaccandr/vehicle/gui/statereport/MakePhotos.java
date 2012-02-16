@@ -11,6 +11,7 @@ import java.util.Map;
 
 import alexaccandr.vehicle.camera.TakeAPhoto;
 import alexaccandr.vehicle.gui.R;
+import alexaccandr.vehicle.photo.PhotoEditor;
 import alexaccandr.vehicle.tools.ApplicationMemory;
 import alexaccandr.vehicle.tools.FileSystem;
 import alexaccandr.vehicle.tools.Image;
@@ -68,6 +69,9 @@ public class MakePhotos extends Activity {
 	String[] photosList = null;
 	// директория папки с фотографиями
 	String directory = null;
+	
+	// 
+	final int SET_CHANGES = 100;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -125,18 +129,26 @@ public class MakePhotos extends Activity {
 				photosList = dir.list();
 				// предворительно очищаем буфер приложения
 				lastFault = fault;
-				ApplicationMemory.eraseBitmapBuffer(bt1);
-				ApplicationMemory.eraseBitmapBuffer(bt2);
-				System.gc();
-				// чистим картинки
-				clearImages();				
-				// запускаем полосу прогресса
-				pd = ProgressDialog.show(context, "Загружаем фото",
-						"Загрузка из памяти телефона...", true, false);
-				Thread thread = new Thread(null, runProgress);
-				thread.start();
+				refreshImages();
 			}
 		});
+	}
+	
+	/*
+	 * очищаем от предыдущих картинок
+	 * загружаем закртинки по указанному разделу
+	 */
+	void refreshImages(){
+		ApplicationMemory.eraseBitmapBuffer(bt1);
+		ApplicationMemory.eraseBitmapBuffer(bt2);
+		System.gc();
+		// чистим картинки
+		clearImages();				
+		// запускаем полосу прогресса
+		pd = ProgressDialog.show(context, "Загружаем фото",
+				"Загрузка из памяти телефона...", true, false);
+		Thread thread = new Thread(null, runProgress);
+		thread.start();
 	}
 	
 	/*
@@ -413,5 +425,24 @@ public class MakePhotos extends Activity {
 					}
 				});
 		alertbox.show();
+	}
+	
+	
+	public void onImageClick(View v){
+		Intent ite = new Intent(context,PhotoEditor.class);
+		ite.putExtra("cmnd", 1);
+		ite.putExtra("dir", directory+"/");
+		ite.putExtra("header",lastFault);
+		startActivityForResult(ite, 0);
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch (resultCode) {
+		case SET_CHANGES:
+			refreshImages();
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

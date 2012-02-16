@@ -7,12 +7,13 @@ import java.util.Map;
 
 import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.statereport.Complex;
+import alexaccandr.vehicle.gui.statereport.Diagnostic;
 import alexaccandr.vehicle.gui.statereport.Hierarchy1;
 import alexaccandr.vehicle.gui.statereport.SummerWinter;
+import alexaccandr.vehicle.gui.statereport.Options;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory.Options;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -79,7 +80,7 @@ public class StateReportTab extends Activity {
 					startActivity(new Intent(context,Complex.class));
 					break;
 				case OPTIONS:
-					Toast.makeText(context, "Options not work yet", Toast.LENGTH_SHORT).show();
+					startActivity(new Intent(context,Options.class));
 					break;
 				case EXTERNAL_INSPECTION:
 					startActivity(new Intent(context,Hierarchy1.class));
@@ -88,7 +89,7 @@ public class StateReportTab extends Activity {
 					startActivity(new Intent(context,Hierarchy1.class));
 					break;
 				case DIAGNOSTIC:
-					Toast.makeText(context, "Diagnostic not work yet", Toast.LENGTH_SHORT).show();
+					startActivity(new Intent(context,Diagnostic.class)); 
 					break;
 				case WHEELS_STATE:
 					startActivity(new Intent(context,SummerWinter.class));

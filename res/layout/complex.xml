@@ -137,6 +137,12 @@
                 </LinearLayout>
 
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
                  <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -174,6 +180,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -211,6 +223,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -249,6 +267,12 @@
 
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -286,6 +310,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -323,6 +353,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -360,6 +396,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -397,6 +439,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -434,6 +482,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -471,6 +525,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -508,6 +568,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -545,6 +611,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -582,6 +654,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -619,6 +697,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -656,6 +740,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -693,6 +783,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -730,6 +826,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -767,6 +869,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -804,6 +912,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -841,6 +955,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -878,6 +998,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -915,6 +1041,12 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <ImageView
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/down" />
              <LinearLayout
                     android:id="@+id/linearLayout1"
                     android:layout_width="fill_parent"
@@ -952,6 +1084,26 @@
                             android:text="" />
                     </LinearLayout>
             </LinearLayout>
+            <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#FFFFFF"
+            android:gravity="center" >
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="140dp"
+                android:paddingRight="5dp"
+                android:text="Сохранить" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="140dp"
+                android:paddingLeft="5dp"
+                android:text="Отмена" />
+        </LinearLayout>
             </LinearLayout>
     </ScrollView>
 

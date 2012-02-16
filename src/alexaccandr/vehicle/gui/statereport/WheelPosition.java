@@ -3,14 +3,17 @@ package alexaccandr.vehicle.gui.statereport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import alexaccandr.vehicle.gui.R;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
@@ -40,8 +43,8 @@ public class WheelPosition extends Activity {
 
 		// получаем ссылку на заголовок
 		head = (TextView) findViewById(R.wheels.text);
-		// присваиваем название
-		head.setText("Расположение колеса");
+		// устанавливаем заголовок
+		head.setText(getIntent().getExtras().getString("head"));
 		// инициализация списка
 		ListView lv = (ListView) findViewById(R.wheels.list);
 		String[] from = new String[] { "rowid0", "rowid1" };
@@ -87,27 +90,9 @@ public class WheelPosition extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
-				// выбран пункт
-				/*switch (arg2) {
-				// лето
-				case 0:*/
-					wheelPosition.putExtra("item", arg2);					
-					//break;
-				/*// зима
-				case 1:
-					wheelPosition.putExtra("item", 1);
-					//startActivity(wheelPosition);
-					// лето
-				case 2:
-					wheelPosition.putExtra("item", 2);
-					//startActivity(wheelPosition);
-					break;
-				// зима
-				case 3:
-					wheelPosition.putExtra("item", 3);
-					//startActivity(wheelPosition);
-					break;
-				}*/
+				// отправить заголовок с название выбранного пункта
+				// собрать заголовок
+					wheelPosition.putExtra("head",((Map<String, String>) arg0.getItemAtPosition(arg2)).get("rowid0"));			
 				startActivity(wheelPosition);
 			}
 		});

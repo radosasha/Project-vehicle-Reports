@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -26,9 +27,11 @@ public class MainActivity extends TabActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.main);
 		context = this;
 		/* TabHost will have Tabs */
+		
 		TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
 
 		/*

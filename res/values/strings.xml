@@ -13,4 +13,7 @@
 	<string name="data_model">Модель</string>
 	<string name="data_odometer">Пробег, км</string>
 	<string name="data_comments">Комментарий</string>
+	
+
+
 </resources>

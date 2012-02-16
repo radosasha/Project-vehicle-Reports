@@ -3,6 +3,7 @@ package alexaccandr.vehicle.gui.statereport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import alexaccandr.vehicle.gui.R;
 import android.app.Activity;
@@ -30,7 +31,7 @@ AdapterView.OnItemSelectedListener {
 	// Заголовок
 	TextView head;
 	// спинер "шины"
-	Spinner bus;
+	//Spinner bus;
 	// "намерение" перейти на страницу "расположение колеса
 	Intent wheelPosition;
 
@@ -46,24 +47,7 @@ AdapterView.OnItemSelectedListener {
 		// получаем ссылку на заголовок
 		head = (TextView) findViewById(R.wheels.text);
 		// присваиваем название
-		head.setText("Сезонность шины");
-		// выбор шины
-		bus = (Spinner)findViewById(R.wheel.spinner);
-		// инициализация спиннера
-		//тестовые данные
-		String[] items = { "bus1","bus2","bus3","bus4","bus5","bus6","bus7" };
-		bus.setOnItemSelectedListener(this);
-
-		ArrayAdapter aa = new ArrayAdapter(
-				this,
-				android.R.layout.simple_spinner_item, 
-				items);
-
-		aa.setDropDownViewResource(
-		   android.R.layout.simple_spinner_dropdown_item);
-		bus.setAdapter(aa);
-		
-		
+		head.setText("Осмотр колёс");	
 	
 
 		// инициализация списка
@@ -74,12 +58,12 @@ AdapterView.OnItemSelectedListener {
 		fillMaps = new ArrayList<HashMap<String, Object>>();
 		// Разметка пункта "лето" в списке
 		HashMap<String, Object> summer = new HashMap<String, Object>();
-		summer.put("rowid0", "Лето");
+		summer.put("rowid0", "Летние покрышки");
 		summer.put("rowid1", R.drawable.photo_not_choosed);
 
 		// Разметка пункта "зима" в списке
 		HashMap<String, Object> winter = new HashMap<String, Object>();
-		winter.put("rowid0", "Зима");
+		winter.put("rowid0", "Зимние покрышки");
 		winter.put("rowid1", R.drawable.photo_not_choosed);
 		
 
@@ -93,25 +77,14 @@ AdapterView.OnItemSelectedListener {
 
 		// обновить изменения в списке
 		adapter.notifyDataSetChanged();
-
 		// установить слушателя на элемент списка
 		lv.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
-					long arg3) {
-				// выбран пункт
-				switch (arg2) {
-				// лето
-				case 0:
-					wheelPosition.putExtra("item", 0);
-					startActivity(wheelPosition);
-					break;
-				// зима
-				case 1:
-					wheelPosition.putExtra("item", 1);
-					startActivity(wheelPosition);
-				}
+					long arg3) {				
+					wheelPosition.putExtra("head", ((Map<String, String>) arg0.getItemAtPosition(arg2)).get("rowid0"));				
+				startActivity(wheelPosition);
 			}
 		});
 	}

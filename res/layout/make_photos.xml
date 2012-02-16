@@ -48,6 +48,7 @@
                 android:id="@+image/first"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onImageClick"
                  />
         </LinearLayout>
 
@@ -61,9 +62,10 @@
             android:layout_weight="1">
 
             <ImageView
-                android:id="@+image/second"
+                android:id="@+image/second" 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="onImageClick" 
                  />
         </LinearLayout>
     </LinearLayout>

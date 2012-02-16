@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.Toast;
@@ -28,6 +29,7 @@ public class AddVehicle extends TabActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.add_vehicle);
 		context = this;
 		/* TabHost will have Tabs */

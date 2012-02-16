@@ -7,9 +7,12 @@ import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.tools.FileSystem;
 import alexaccandr.vehicle.tools.Image;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -21,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
+import android.widget.MultiAutoCompleteTextView.CommaTokenizer;
 
 public class PhotoEditor extends Activity  implements OnClickListener{
 	private GestureDetector gesturedetector = null;
@@ -29,10 +33,13 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 	ImageView im1 ;
 	ImageView im2 ;
 	TextView head ;
+	int command;
 	String photoFolder ;
 	Context context;
 	int cursorPosition = -1;
 	public static LinkedList<LinkedList<Object>> allPhotosStructure;
+	// полоса прогресса
+	private ProgressDialog pd;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,26 +59,71 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 			}
 		};	    
 		
-		// извлекаем команду из "намерения"
-		// 0 - требуется загрузить "основные фотографии" для раздела "фото"
-		// 1 - требуется загрузить фотографии из раздела "осмотр"
-		int command = getIntent().getExtras().getInt("cmnd");
-		// извлекаем директорию
-		photoFolder =  getIntent().getExtras().getString("dir");
-		// получить список всех файлов по указанной директории
-		String filesList [] = FileSystem.getFilesList(photoFolder);
-		// загружаем фотки
-		LinkedList<Bitmap> photos = downloadPhotos(filesList);
-		// создать заголовки к файлам
-		String headers[] = createHeaders(command, filesList);		
-		// генерируем конечную структуру списка фотографий
-		allPhotosStructure = getStruct(filesList,headers,photos);
-		if(allPhotosStructure.size() == 0){
-			Toast.makeText(context, "фотографии отуствуют", Toast.LENGTH_LONG).show();
-			//finish();
-		}
-		else nextView();
+		// запускаем полосу прогресса
+		pd = ProgressDialog.show(context, "Загружаем фото",
+				"Загрузка из памяти телефона...", true, false);
+		Thread thread = new Thread(null, runProgress);
+		thread.start();
+		
 	}
+	
+	private Runnable runProgress = new Runnable() {
+		@Override
+		public void run() {
+			// сообщение
+			Message msg = new Message();
+			Bundle bd  = new Bundle();
+			try{
+			// извлекаем команду из "намерения"
+			// 0 - требуется загрузить "основные фотографии" для раздела "фото"
+			// 1 - требуется загрузить фотографии из раздела "осмотр"
+			command = getIntent().getExtras().getInt("cmnd");
+			// извлекаем директорию
+			photoFolder =  getIntent().getExtras().getString("dir");
+			// получить список всех файлов по указанной директории
+			String filesList [] = FileSystem.getFilesList(photoFolder);
+			// загружаем фотки
+			LinkedList<Bitmap> photos = downloadPhotos(filesList);
+			// создать заголовки к файлам
+			String headers[] = createHeaders(command, filesList);		
+			// генерируем конечную структуру списка фотографий
+			allPhotosStructure = getStruct(filesList,headers,photos);
+			// формируем сообщение 
+			
+			if(allPhotosStructure.size() == 0){
+				//Toast.makeText(context, "фотографии отуствуют", Toast.LENGTH_LONG).show();
+				bd.putInt("cmnd", 0);
+				//finish();
+			}
+			else bd.putInt("cmnd", 1);			
+				//nextView();
+			} catch (Exception e) {
+				bd.putInt("cmnd", 2);
+			}
+			// отправить сообщение
+			msg.setData(bd);
+			reportHandler.sendMessage(msg);
+		}
+	};
+	
+	private Handler reportHandler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			int command = msg.getData().getInt("cmnd");
+			switch (command) {
+			case 0:
+				Toast.makeText(context, "фотографии отуствуют", Toast.LENGTH_LONG).show();
+				break;
+			case 1:
+				nextView();
+				break;
+			case 2:
+				Toast.makeText(context, "Ошибка при загрузке", Toast.LENGTH_LONG).show();
+			}			
+			pd.dismiss();
+		}
+	};
+	
 
 	// создает конечную структуру для создаржащую всю неоходимую информацию для редактирования фото
 	// структуру одной записи { "имя файла", "заголовок фото", "декодированное фото"}
@@ -188,7 +240,13 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 			im1.setImageBitmap((Bitmap) allPhotosStructure.get(cursorPos).get(2));
 			break;
 		}
-		head.setText((String)allPhotosStructure.get(cursorPosition).get(1)+"     "+(cursorPos+1)+"/"+allPhotosStructure.size());
+		switch(command){
+		case 0:
+			head.setText((String)allPhotosStructure.get(cursorPosition).get(1)+"     "+(cursorPos+1)+"/"+allPhotosStructure.size());
+		break;
+		case 1:
+			head.setText(getIntent().getExtras().getString("header")+"     "+(cursorPos+1)+"/"+allPhotosStructure.size());
+		}
 	}
 
 	class MyGestureDetector extends SimpleOnGestureListener {

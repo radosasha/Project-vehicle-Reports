@@ -67,6 +67,8 @@
          <!--  hierarchy 2 list activity -->
         <activity android:name="alexaccandr.vehicle.gui.statereport.Hierarchy2"/>
         <activity android:name="alexaccandr.vehicle.gui.statereport.WheelsState"/>
+        <activity android:name="alexaccandr.vehicle.gui.statereport.Diagnostic"/>
+        <activity android:name="alexaccandr.vehicle.gui.statereport.Options"/>
         
         
         <!--  make photos list activity -->     
