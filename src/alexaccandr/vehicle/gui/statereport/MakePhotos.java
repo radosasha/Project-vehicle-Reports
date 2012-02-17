@@ -143,7 +143,8 @@ public class MakePhotos extends Activity {
 		ApplicationMemory.eraseBitmapBuffer(bt2);
 		System.gc();
 		// чистим картинки
-		clearImages();				
+		Image.clearImages(imageFirst);
+		Image.clearImages(imageSecond);
 		// запускаем полосу прогресса
 		pd = ProgressDialog.show(context, "Загружаем фото",
 				"Загрузка из памяти телефона...", true, false);
@@ -225,14 +226,6 @@ public class MakePhotos extends Activity {
 	};
 	
 	
-
-	// убрать картинки с экрана
-	void clearImages() {
-		if (imageFirst != null)
-			imageFirst.setImageBitmap(null);
-		if (imageSecond != null)
-			imageSecond.setImageBitmap(null);
-	}
 	
 
 	/*
@@ -406,7 +399,9 @@ public class MakePhotos extends Activity {
 				fillMaps.remove(numb);
 				adapter.notifyDataSetChanged();
 				if (fault.equals(lastFault)) {
-					clearImages();
+					// чистим картинки
+					Image.clearImages(imageFirst);
+					Image.clearImages(imageSecond);
 				}
 				try {
 					FileSystem.deleteFolder(new File(
@@ -430,15 +425,19 @@ public class MakePhotos extends Activity {
 	
 	public void onImageClick(View v){
 		Intent ite = new Intent(context,PhotoEditor.class);
+		// послать "редактору фотографий" команду 1 и директорию с текущими фотографиями
 		ite.putExtra("cmnd", 1);
 		ite.putExtra("dir", directory+"/");
 		ite.putExtra("header",lastFault);
+		// запустить редактор
 		startActivityForResult(ite, 0);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		switch (resultCode) {
+		// если были изменения, обновить "предварительные" фотографии
+		// (2 фотографии, расположенные в нижней части экрана)
 		case SET_CHANGES:
 			refreshImages();
 			break;

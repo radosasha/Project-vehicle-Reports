@@ -58,7 +58,8 @@ public class AddVehicle extends TabActivity {
 		// для загрузки фотографий в разделах "осмотр" будет отправлена комманда "1"
 		Intent it = new Intent(this, PhotoEditor.class);
 		it.putExtra("cmnd", 0);
-		it.putExtra("dir", "/sdcard/CarMobile/Photo/");
+		//it.putExtra("dir", "/sdcard/CarMobile/Photo/");
+		it.putExtra("dir", getIntent().getExtras().getString("dir"));
 		TabPhoto.setIndicator("Фото",getResources().getDrawable(R.drawable.photo_icon)).setContent(it); 
 
 		/* Добавить Табы в TabHost для отображения. */

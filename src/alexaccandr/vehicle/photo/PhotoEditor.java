@@ -2,17 +2,25 @@ package alexaccandr.vehicle.photo;
 import java.io.File;
 import java.util.Currency;
 import java.util.LinkedList;
+import java.util.Map;
 
+import alexaccandr.vehicle.camera.TakeAPhoto;
 import alexaccandr.vehicle.gui.R;
+import alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle;
+import alexaccandr.vehicle.tools.ApplicationMemory;
 import alexaccandr.vehicle.tools.FileSystem;
 import alexaccandr.vehicle.tools.Image;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 import android.view.GestureDetector.OnGestureListener;
 import android.view.GestureDetector;
 import android.view.GestureDetector.SimpleOnGestureListener;
@@ -129,6 +137,7 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 	// структуру одной записи { "имя файла", "заголовок фото", "декодированное фото"}
 	private LinkedList<LinkedList<Object>> getStruct(String[] filesList, String[] headers, LinkedList<Bitmap> photos){
 		LinkedList<LinkedList<Object>> finalStruct= new LinkedList<LinkedList<Object>>();
+		if(filesList==null)return finalStruct;
 		for(int i=0;i<filesList.length;i++){
 			LinkedList<Object> record = new LinkedList<Object>();
 			record.add(filesList[i]);
@@ -170,6 +179,7 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 	private LinkedList<Bitmap> downloadPhotos(String[] filesList) {
 		LinkedList<Bitmap> photosList = new LinkedList<Bitmap>();
 	// загрузить все файлы из списка
+		if(filesList == null) return photosList;
 	for(int i=0; i<filesList.length; i++){
 		try{
 			// загружаем и декодируем фото
@@ -222,7 +232,7 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 	// Следующая фотка 
 	private void previousView() {
 		// Next View
-		if (cursorPosition <= 0)
+		if (cursorPosition <= 0  || cursorPosition == -1)
 			return;
 		cursorPosition--;
 		setNextImage(cursorPosition);
@@ -285,5 +295,94 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 	public void onClick(View v) {
 		// Filter f = (Filter) v.getTag();
 	       // FilterFullscreenActivity.show(this, input, f);
+	}
+	
+	// перезаписать фото
+	public void rewriteImage(View v){
+		if(allPhotosStructure.size() == 0){
+			Toast.makeText(context, "Перезапись невозможна, фотографии отсутсвуют.", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("Перезапись");
+		builder.setMessage("Уверены что хотите перезаписать фотографию?");
+		builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+			}
+		});
+		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// ничего не делать
+			}
+		});
+		
+		builder.show();
+	}
+	
+	//удалить фото
+	public void deleteImage(View v){
+		if(allPhotosStructure.size() == 0){
+			Toast.makeText(context, "Фотографии отсутствуют", Toast.LENGTH_SHORT).show();
+			return;
+		}
+		AlertDialog.Builder builder = new AlertDialog.Builder(context);
+		builder.setTitle("Удаление");
+		builder.setMessage("Уверены что хотите удалить фотографию?");
+		builder.setPositiveButton("Да", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				//чистим форму с картинкой
+				switch(cursorPosition % 2){
+				case 0:
+					Image.clearImages(im2);
+					break;
+				case 1:
+					Image.clearImages(im1);					
+				}
+				// чистим буфер от картинки
+				ApplicationMemory.eraseBitmapBuffer((Bitmap)allPhotosStructure.get(cursorPosition).get(2));
+				// чистм с памяти телефона
+				FileSystem.removeFile(photoFolder+allPhotosStructure.get(cursorPosition).get(0));
+				// удаляем инфу о фото
+				allPhotosStructure.remove(cursorPosition);
+				//переключаемся на доступные фото
+				// пробуем вправо
+				Log.e(cursorPosition+"",allPhotosStructure.size()+"");
+				if((cursorPosition)<(allPhotosStructure.size()-1)){
+					nextView();
+				}
+				else{
+					//пробуем влево
+					if((cursorPosition)>(allPhotosStructure.size()-1) & allPhotosStructure.size() != 0){
+						previousView();
+					}
+					else{
+						head.setText("Все фотографии удалены");
+						Toast.makeText(context, "все фотографии удалены", Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+		});
+		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				
+			}
+		});
+		
+		builder.show();
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		super.onActivityResult(requestCode, resultCode, data);
+		
 	}
 }

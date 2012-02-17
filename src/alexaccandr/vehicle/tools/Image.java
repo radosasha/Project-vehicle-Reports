@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 
 public class Image {
 	//decodes image and scales it to reduce memory consumption
@@ -32,4 +33,10 @@ public class Image {
 		    	return null;
 		    }
 		}
+		
+		// убрать картинки с экрана
+		public static void clearImages(ImageView im) {
+			if (im != null)
+				im.setImageBitmap(null);
+			}
 }

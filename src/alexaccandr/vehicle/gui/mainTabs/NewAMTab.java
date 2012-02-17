@@ -9,6 +9,7 @@ import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle;
 import alexaccandr.vehicle.photo.PhotoEditor;
 import alexaccandr.vehicle.tools.ApplicationMemory;
+import alexaccandr.vehicle.tools.FileSystem;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
@@ -61,7 +62,8 @@ public class NewAMTab extends Activity {
 			HashMap<String, Object> map = new HashMap<String, Object>();
 			map.put("rowid0", "08973");
 			map.put("rowid1", "Audi R8 Coupe 4.2");
-			map.put("rowid2", "VIN: 089156733YT12EWQT");
+			map.put("rowid2", "089156733YT12EWQT"+i);
+			FileSystem.createDirectory("089156733YT12EWQT" + i);
 			fillMaps.add(map);
 		}
 		adapter.notifyDataSetChanged();

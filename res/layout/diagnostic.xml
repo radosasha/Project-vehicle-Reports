@@ -57,7 +57,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Добавить новый"
-                android:textSize="15dp" />
+                android:textSize="20dp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -91,7 +91,9 @@
                     android:gravity="center"
                     android:text="ОК: Активные ошибки отсутствуют.\nСпорадические ошибки стёрты."
                     android:textColor="#696969"
-                    android:textSize="15dp" />
+                    android:textSize="20dp"
+                    android:paddingBottom="5dp"
+                    android:paddingTop="5dp" />
             </LinearLayout>
 			
             <ImageView
@@ -122,7 +124,7 @@
                         android:gravity="left"
                         android:text="Опрос диагностическим прибором на наличие ошибок"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -165,7 +167,7 @@
                         android:gravity="left"
                         android:text="Проверка состояния АКБ тестером"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -224,7 +226,7 @@
                         android:gravity="left"
                         android:text="Проверка давления масла манометром"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -253,7 +255,7 @@
                                 android:layout_height="wrap_content"
                                 android:text="бар  "
                                 android:textColor="#000000"
-                                android:textSize="15dp" />
+                                android:textSize="20dp" />
 
                             <EditText
                                 android:id="@+diagnostic/bar"
@@ -278,7 +280,7 @@
                 android:layout_height="wrap_content"
                 android:text="ДВС"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -301,7 +303,7 @@
                         android:gravity="left"
                         android:text="Исполнительные элементы"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -345,7 +347,7 @@
                         android:gravity="left"
                         android:text="Базовые ругулировки"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -374,7 +376,7 @@
                 android:layout_height="wrap_content"
                 android:text="КПП"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -397,7 +399,7 @@
                         android:gravity="left"
                         android:text="Исполнительные элементы"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -441,7 +443,7 @@
                         android:gravity="left"
                         android:text="Базовые ругулировки"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -470,7 +472,7 @@
                 android:layout_height="wrap_content"
                 android:text="Климатическая установка"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -493,7 +495,7 @@
                         android:gravity="left"
                         android:text="Исполнительные элементы"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -537,7 +539,7 @@
                         android:gravity="left"
                         android:text="Базовые ругулировки"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -566,7 +568,7 @@
                 android:layout_height="wrap_content"
                 android:text="Проверка на вибростенде"
                 android:textColor="#000000"
-                android:textSize="15dp"
+                android:textSize="20dp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -589,7 +591,7 @@
                         android:gravity="left"
                         android:text="Ходовая часть"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -633,7 +635,7 @@
                         android:gravity="left"
                         android:text="Тормозная система"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -677,7 +679,7 @@
                         android:gravity="left"
                         android:text="Проверка компрессии в цилиндрах компрессографом"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -796,7 +798,7 @@
                         android:gravity="left"
                         android:text="Количество прописанных ключей"
                         android:textColor="#000000"
-                        android:textSize="15dp" />
+                        android:textSize="20dp" />
                 </LinearLayout>
 
                 <LinearLayout

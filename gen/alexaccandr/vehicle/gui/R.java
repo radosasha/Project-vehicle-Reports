@@ -150,20 +150,21 @@ public final class R {
         public static final int id5=0x7f0c0004;
     }
     public static final class list_new_am {
-        public static final int id1=0x7f0e0000;
-        public static final int id2=0x7f0e0001;
-        public static final int id3=0x7f0e0002;
+        public static final int id1=0x7f0d0001;
+        public static final int id2=0x7f0d0002;
+        public static final int id3=0x7f0d0003;
+        public static final int vin=0x7f0d0000;
     }
     public static final class list_report_state {
         public static final int id1=0x7f0f0000;
         public static final int id2=0x7f0f0001;
     }
     public static final class makephoto {
-        public static final int errortext=0x7f0d0000;
-        public static final int head=0x7f0d0003;
-        public static final int list=0x7f0d0004;
-        public static final int photo1=0x7f0d0001;
-        public static final int photo2=0x7f0d0002;
+        public static final int errortext=0x7f0e0000;
+        public static final int head=0x7f0e0003;
+        public static final int list=0x7f0e0004;
+        public static final int photo1=0x7f0e0001;
+        public static final int photo2=0x7f0e0002;
     }
     public static final class makephotos {
         public static final int rootview=0x7f100000;

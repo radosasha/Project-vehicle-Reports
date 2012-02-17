@@ -22,7 +22,7 @@
                 android:id="@+photoedit/head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Head"
+                android:text="Фотографии отсутствуют"
                 android:textSize="20dp" />
         </LinearLayout>
 
@@ -43,8 +43,7 @@
                     android:id="@+photoedit/photo1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/account_not_choosed" />
+                    android:layout_centerInParent="true"/>
             </RelativeLayout>
 
             <RelativeLayout
@@ -56,8 +55,7 @@
                     android:id="@+photoedit/photo2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:src="@drawable/account_choosed" />
+                    android:layout_centerInParent="true" />
             </RelativeLayout>
         </ViewSwitcher>
 
@@ -70,6 +68,7 @@
             android:paddingTop="10dp" >
 
             <ImageView
+                android:onClick="rewriteImage"
                 android:id="@+photoedit/rewrite"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,6 +76,7 @@
                 android:src="@drawable/photo_not_choosed" />
 
             <ImageView
+                android:onClick="deleteImage"
                 android:id="@+photoedit/delete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

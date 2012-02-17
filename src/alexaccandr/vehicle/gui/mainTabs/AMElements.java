@@ -36,6 +36,8 @@ public class AMElements extends Activity{
 		AlertDialog.Builder builder = new AlertDialog.Builder(context);
 		// собрать заголовок
 		Map<String, String> selection = (Map<String, String>) arg0.getItemAtPosition(arg2);
+		// папка данной машины
+		final String autoFolder = selection.get("rowid2");
 		builder.setTitle(selection.get("rowid0")+" "+selection.get("rowid1")+" "+selection.get("rowid2"));
 		builder.setItems(items, new DialogInterface.OnClickListener() {
 		    public void onClick(DialogInterface dialog, int item) {
@@ -45,13 +47,14 @@ public class AMElements extends Activity{
 		    		stateRep = new Intent(context, AddVehicle.class);
 		    		// передать номер таба
 		    		stateRep.putExtra("curtab", 1);
+		    		stateRep.putExtra("dir", "/sdcard/CarMobile/Photo/"+autoFolder+"/");
 		    		context.startActivityForResult(stateRep,0);
 		    		break;
 		    	// добавить фотографии
 		    	case 1:		    		
 		    		photos = new Intent(context, TakeAPhoto.class);
 		    		photos.putExtra("cmnd", 0);
-		    		photos.putExtra("dir", "/sdcard/CarMobile/Photo/");
+		    		photos.putExtra("dir", "/sdcard/CarMobile/Photo/"+autoFolder+"/");
 		    		context.startActivity(photos);
 		    		break;
 		    	// дублировать автомобиль
