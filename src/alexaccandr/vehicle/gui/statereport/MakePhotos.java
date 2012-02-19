@@ -136,14 +136,8 @@ public class MakePhotos extends Activity {
 				String fault = selection.get("rowid0");
 				// если был выбран первый пункт, ничего не делать
 				if(fault.equals("Не ОК")) return;
-				// получаем список всех фотографий
-				//directory = "/sdcard/CarMobile/Faults/"+fault;
-				directory = getIntent().getExtras().getString("dir")+fault;
-				File dir = new File(directory);
-				photosList = dir.list();
-				// предворительно очищаем буфер приложения
-				lastFault = fault;
-				refreshImages();
+				
+				refreshImages(fault);
 			}
 		});
 	}
@@ -152,7 +146,17 @@ public class MakePhotos extends Activity {
 	 * очищаем от предыдущих картинок
 	 * загружаем закртинки по указанному разделу
 	 */
-	void refreshImages(){
+	void refreshImages(String fault){
+		// получаем список всех фотографий
+		//directory = "/sdcard/CarMobile/Faults/"+fault;
+		directory = getIntent().getExtras().getString("dir")+fault;
+		File dir = new File(directory);
+		photosList = dir.list();
+		// воизбежание ошибки "Null pointer"
+		if(photosList == null) photosList = new String[0];
+		// предворительно очищаем буфер приложения
+		lastFault = fault;
+		
 		ApplicationMemory.eraseBitmapBuffer(bt1);
 		ApplicationMemory.eraseBitmapBuffer(bt2);
 		System.gc();
@@ -351,7 +355,7 @@ public class MakePhotos extends Activity {
 		camera.putExtra("cmnd", 1);
 		// директория для сохранения фото
 		camera.putExtra("dir", directory);
-		startActivity(camera);
+		startActivityForResult(camera,100);
 	}
 
 	/*
@@ -459,7 +463,7 @@ public class MakePhotos extends Activity {
 		// если были изменения, обновить "предварительные" фотографии
 		// (2 фотографии, расположенные в нижней части экрана)
 		case SET_CHANGES:
-			refreshImages();
+			refreshImages(lastFault);
 			break;
 		}
 		super.onActivityResult(requestCode, resultCode, data);

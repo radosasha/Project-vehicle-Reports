@@ -1,6 +1,7 @@
 package alexaccandr.vehicle.tools;
 
 import java.io.File;
+import java.io.FilenameFilter;
 
 public class FileSystem {
 	
@@ -22,10 +23,22 @@ public class FileSystem {
 		return new File(dir).mkdirs();
 	}
 	
-	// возвращает список всех файлов по указанной директории
-	public static String[] getFilesList(String inDir){
-		return new File(inDir).list();
+	// возвращает список всех JPEG файлов по указанной директории
+	public static String[] getJPEGFilesList(String inDir){
+		// FIX
+		return new File(inDir).list(new FilenameFilter() {
+			@Override
+			public boolean accept(File dir, String filename) {
+				return filename.endsWith(".jpg");
+			}
+		});
 	}
+	
+	// возвращает список всех файлов по указанной директории
+		public static String[] getFilesList(String inDir){
+			// FIX
+			return new File(inDir).list();
+		}
 	
 	// удалить файл
 	public static void removeFile(String path){

@@ -89,7 +89,7 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 			// извлекаем директорию
 			photoFolder =  getIntent().getExtras().getString("dir");
 			// получить список всех файлов по указанной директории
-			String filesList [] = FileSystem.getFilesList(photoFolder);
+			String filesList [] = FileSystem.getJPEGFilesList(photoFolder);
 			// загружаем фотки
 			LinkedList<Bitmap> photos = downloadPhotos(filesList);
 			// создать заголовки к файлам
@@ -364,19 +364,7 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 						Toast.makeText(context, "все фотографии удалены", Toast.LENGTH_SHORT).show();
 					}
 				}
-				/*if((cursorPosition)>(allPhotosStructure.size()-1) & allPhotosStructure.size() != 0){
-					previousView();
-				}
-				
-				else{
-					if((cursorPosition)<(allPhotosStructure.size()-1)){
-						nextView();
-					}
-					else{
-						head.setText("Все фотографии удалены");
-						Toast.makeText(context, "все фотографии удалены", Toast.LENGTH_SHORT).show();
-					}
-				}*/
+				setResult(100);
 			}
 		});
 		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {

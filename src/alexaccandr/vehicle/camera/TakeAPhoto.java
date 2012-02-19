@@ -216,6 +216,7 @@ public class TakeAPhoto extends Activity implements SurfaceHolder.Callback,
 			savePic();
 			// выставить кнопки по умолчанию
 			returnOriginal();
+			setResult(100);
 			break;
 			
 		// отмена
