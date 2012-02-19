@@ -354,19 +354,29 @@ public class PhotoEditor extends Activity  implements OnClickListener{
 				//переключаемся на доступные фото
 				// пробуем вправо
 				Log.e(cursorPosition+"",allPhotosStructure.size()+"");
-				if((cursorPosition)<(allPhotosStructure.size()-1)){
-					nextView();
-				}
-				else{
-					//пробуем влево
-					if((cursorPosition)>(allPhotosStructure.size()-1) & allPhotosStructure.size() != 0){
-						previousView();
-					}
+				//пробуем влево
+				if(cursorPosition < allPhotosStructure.size())	setNextImage(cursorPosition);
+				else {
+					if(allPhotosStructure.size()>0)
+					previousView();
 					else{
 						head.setText("Все фотографии удалены");
 						Toast.makeText(context, "все фотографии удалены", Toast.LENGTH_SHORT).show();
 					}
 				}
+				/*if((cursorPosition)>(allPhotosStructure.size()-1) & allPhotosStructure.size() != 0){
+					previousView();
+				}
+				
+				else{
+					if((cursorPosition)<(allPhotosStructure.size()-1)){
+						nextView();
+					}
+					else{
+						head.setText("Все фотографии удалены");
+						Toast.makeText(context, "все фотографии удалены", Toast.LENGTH_SHORT).show();
+					}
+				}*/
 			}
 		});
 		builder.setNegativeButton("Отмена", new DialogInterface.OnClickListener() {

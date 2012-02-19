@@ -26,7 +26,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class StateReportTab extends Activity {
 	// Контекст страницы
-	Context context;
+	Activity context;
 
 	// переменные списка
 	SimpleAdapter adapter = null;
@@ -83,10 +83,16 @@ public class StateReportTab extends Activity {
 					startActivity(new Intent(context,Options.class));
 					break;
 				case EXTERNAL_INSPECTION:
-					startActivity(new Intent(context,Hierarchy1.class));
+					Intent external = new Intent(context,Hierarchy1.class);
+					external.putExtra("dir", context.getIntent().getExtras().getString("dir")+"Внешний осмотр/");
+					startActivity(external);
+					//startActivity(new Intent(context,Hierarchy1.class));
 					break;
 				case INTERNAL_INSPECTION:
-					startActivity(new Intent(context,Hierarchy1.class));
+					Intent internal = new Intent(context,Hierarchy1.class);
+					internal.putExtra("dir", getIntent().getExtras().getString("dir")+"Внутренний осмотр/ё");
+					startActivity(internal);
+					//startActivity(new Intent(context,Hierarchy1.class));
 					break;
 				case DIAGNOSTIC:
 					startActivity(new Intent(context,Diagnostic.class)); 

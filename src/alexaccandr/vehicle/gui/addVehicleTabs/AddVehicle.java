@@ -51,8 +51,10 @@ public class AddVehicle extends TabActivity {
 		TabData.setIndicator("Данные",getResources().getDrawable(R.drawable.data_icon)).setContent(
 				new Intent(this, DataTab.class));
 		// таб "отчет о состоянии"
+		Intent rep = new Intent(this, StateReportTab.class);
+		rep.putExtra("dir", getIntent().getExtras().getString("dir"));
 		TabStateReport.setIndicator("Отчет о состоянии",getResources().getDrawable(R.drawable.state_icon)).setContent(  
-				new Intent(this, StateReportTab.class));
+				rep);
 		// таб "фото"
 		// при загрузке таба - отправляет команду "0" классу "PhotoEditor" для загрузки основных фотографий
 		// для загрузки фотографий в разделах "осмотр" будет отправлена комманда "1"

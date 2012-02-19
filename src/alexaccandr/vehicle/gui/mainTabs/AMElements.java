@@ -1,15 +1,27 @@
 package alexaccandr.vehicle.gui.mainTabs;
+import java.util.ArrayList;
 import java.util.Map;
 
 import alexaccandr.vehicle.camera.TakeAPhoto;
+import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle;
 import alexaccandr.vehicle.gui.addVehicleTabs.StateReportTab;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /*
@@ -64,5 +76,87 @@ public class AMElements extends Activity{
 		    }
 		});
 		builder.show();
+	}
+	
+	void onDownloadClick(){
+		 final ListView lv;
+		 final EditText et;
+		 final String listview_array[] = {"Единая Россия", "ООО \"Рога и Копыта\"", "Рольф", "\"ростикс KFC\"", "Другое","Без названия" };
+		 final ArrayList<String> array_sort = new ArrayList<String>();
+		// создаем диалоговое окно
+			final Dialog dialog = new Dialog(context);
+			// разметка окна
+			dialog.setContentView(R.layout.search_dialog);
+			// заголовок
+			dialog.setTitle("Загрузка автомобилей");
+			dialog.setCancelable(true);
+			// текстовое окно для ввода названия неисравности
+			//final EditText et = (EditText) dialog.findViewById(R.error.et);
+			lv = (ListView)dialog. findViewById(R.search.list);
+			et = (EditText)dialog. findViewById(R.search.edittext);
+			setAdapter(listview_array, lv);
+			et.addTextChangedListener(new TextWatcher() {
+				public void afterTextChanged(Editable s) {
+					// Abstract Method of TextWatcher Interface.
+				}
+
+				public void beforeTextChanged(CharSequence s, int start, int count,
+						int after) {
+					// Abstract Method of TextWatcher Interface.
+				}
+
+				public void onTextChanged(CharSequence s, int start, int before,
+						int count) {
+					 final int textlength = et.getText().length();
+					array_sort.clear();
+					for (int i = 0; i < listview_array.length; i++) {
+						if (textlength <= listview_array[i].length()) {
+							if (et.getText()
+									.toString()
+									.equalsIgnoreCase(
+											(String) listview_array[i].subSequence(
+													0, textlength))) {
+								array_sort.add(listview_array[i]);
+							}
+						}
+					}
+					
+					setAdapter(array_sort, lv);
+				}
+				
+			});
+			dialog.show();
+	
+	}
+	
+	void setAdapter(String [] array_sort, ListView listView){
+		listView.setAdapter(new ArrayAdapter<String>(context,
+				android.R.layout.simple_list_item_1,  array_sort){
+	        @Override
+	        public View getView(int position, View convertView,
+	                ViewGroup parent) {
+	            View view =super.getView(position, convertView, parent);
+	            TextView textView=(TextView) view.findViewById(android.R.id.text1);
+	            /*YOUR CHOICE OF COLOR*/
+	            textView.setTextColor(Color.BLACK);
+	            return view;
+	        }
+	    });
+	}
+	
+	private void setAdapter(ArrayList<String> array_sort,
+			ListView listView) {
+		listView.setAdapter(new ArrayAdapter<String>(context,
+				android.R.layout.simple_list_item_1,  array_sort){
+	        @Override
+	        public View getView(int position, View convertView,
+	                ViewGroup parent) {
+	            View view =super.getView(position, convertView, parent);
+	            TextView textView=(TextView) view.findViewById(android.R.id.text1);
+	            /*YOUR CHOICE OF COLOR*/
+	            textView.setTextColor(Color.BLACK);
+	            return view;
+	        }
+	    });
 	}
 }

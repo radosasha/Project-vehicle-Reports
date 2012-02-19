@@ -103,6 +103,19 @@ public class MakePhotos extends Activity {
 		textData.put("rowid2", R.drawable.transperent);	
 		fillMaps.add(textData);	
 		
+		// добавим в список уже существующие неисправности
+		String [] filesList = FileSystem.getFilesList(getIntent().getExtras().getString("dir"));
+		if (filesList != null) {
+			for (int i = 0; i < filesList.length; i++) {
+				HashMap<String, Object> map = new HashMap<String, Object>();
+				map.put("rowid0", filesList[i]);
+				map.put("rowid1", R.drawable.photo_not_choosed);
+				map.put("rowid2", R.drawable.trash_not_choosed);
+				// добавляем в список
+				fillMaps.add(map);
+			}
+		}
+		
 		// установим список на первый уровень иерархии
 		adapter = new SimpleAdapter(this, fillMaps, R.layout.list_make_photos,
 				from, to);
@@ -124,7 +137,8 @@ public class MakePhotos extends Activity {
 				// если был выбран первый пункт, ничего не делать
 				if(fault.equals("Не ОК")) return;
 				// получаем список всех фотографий
-				directory = "/sdcard/CarMobile/Faults/"+fault;
+				//directory = "/sdcard/CarMobile/Faults/"+fault;
+				directory = getIntent().getExtras().getString("dir")+fault;
 				File dir = new File(directory);
 				photosList = dir.list();
 				// предворительно очищаем буфер приложения
@@ -267,7 +281,8 @@ public class MakePhotos extends Activity {
 						return;
 					}
 					// пробуем создать директорию по названию неисправности
-					File directory =new File("/sdcard/CarMobile/Faults/"+faultName.replace("/", ""));
+					//File directory =new File("/sdcard/CarMobile/Faults/"+faultName.replace("/", ""));
+					File directory =new File(getIntent().getExtras().getString("dir")+faultName.replace("/", ""));
 					if(!directory.exists()){
 						if(!directory.mkdirs()){
 							Toast.makeText(context, "Неудачное название. Попробуйте исключить любые символы из названия", Toast.LENGTH_LONG).show();
@@ -303,7 +318,9 @@ public class MakePhotos extends Activity {
 		else{
 			// проверяем можно ли добавить новое фото
 			//(максимальное количество фотографий - 2 штуки)
-			File saveDir = new File("/sdcard/CarMobile/Faults/"+fault); 
+			//File saveDir = new File("/sdcard/CarMobile/Faults/"+fault); 
+			File saveDir = new File(getIntent().getExtras().getString("dir")+fault); 
+			
 			/*
 			// в дальнейшем директории будут содержать более сложный адрес,
 			// включая название осмотра, сторону , название конкретного объекта и т.д.
@@ -321,7 +338,9 @@ public class MakePhotos extends Activity {
 					return;
 				}
 				// включаем камеру
-				startCamera("/sdcard/CarMobile/Faults/"+fault+"/");
+				//startCamera("/sdcard/CarMobile/Faults/"+fault+"/");
+				startCamera(getIntent().getExtras().getString("dir")+fault+"/");
+				
 			//}
 		}
 	}
@@ -404,8 +423,9 @@ public class MakePhotos extends Activity {
 					Image.clearImages(imageSecond);
 				}
 				try {
-					FileSystem.deleteFolder(new File(
-							"/sdcard/CarMobile/Faults/" + fault + ""));
+					//FileSystem.deleteFolder(new File("/sdcard/CarMobile/Faults/" + fault + ""));
+					FileSystem.deleteFolder(new File(getIntent().getExtras().getString("dir") + fault + ""));
+					
 				} catch (Exception e) {
 					Toast.makeText(context, "Ошибка при удалении файлов",
 							Toast.LENGTH_LONG).show();

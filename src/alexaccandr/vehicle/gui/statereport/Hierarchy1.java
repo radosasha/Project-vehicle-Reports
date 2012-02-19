@@ -3,6 +3,7 @@ package alexaccandr.vehicle.gui.statereport;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import alexaccandr.vehicle.gui.R;
 import android.app.Activity;
@@ -69,7 +70,10 @@ public class Hierarchy1 extends Activity {
 			public void onItemClick(AdapterView<?> arg0, View arg1, int arg2,
 					long arg3) {
 				// выбран пункт
-				startActivity(new Intent(context,Hierarchy2.class));
+				Intent h1 = new Intent(context,Hierarchy2.class);
+				h1.putExtra("dir", getIntent().getExtras().getString("dir")+((Map<String, String>) arg0.getItemAtPosition(arg2)).get("rowid0")+"/");
+				startActivity(h1);
+				//startActivity(new Intent(context,Hierarchy2.class));
 			}
 		});
 	}

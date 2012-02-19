@@ -91,10 +91,13 @@ public class AllAMTab extends Activity {
 			// Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
 			// передать номер таба
 			addReportIntent.putExtra("curtab", 0);
+			addReportIntent.putExtra("dir", "/sdcard/CarMobile/Photo/");
 			startActivityForResult(addReportIntent, RESULT_OK);
 			break;
 		case R.menu.download:
-			Toast.makeText(context, "Download clicked", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "Download clicked", Toast.LENGTH_SHORT).show();
+			AMElements aem = new AMElements(context);
+			aem.onDownloadClick();
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}

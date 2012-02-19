@@ -5,26 +5,36 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 import alexaccandr.vehicle.gui.R;
 import alexaccandr.vehicle.gui.addVehicleTabs.AddVehicle;
+import alexaccandr.vehicle.gui.statereport.MakePhotos;
 import alexaccandr.vehicle.photo.PhotoEditor;
 import alexaccandr.vehicle.tools.ApplicationMemory;
 import alexaccandr.vehicle.tools.FileSystem;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class NewAMTab extends Activity {
@@ -96,13 +106,19 @@ public class NewAMTab extends Activity {
 			// Toast.makeText(context, "Add", Toast.LENGTH_SHORT).show();
 			// передать номер таба
 			addReportIntent.putExtra("curtab", 0);
+			addReportIntent.putExtra("dir", "/sdcard/CarMobile/Photo/");
+			addReportIntent.putExtra("vin", "");
 			startActivityForResult(addReportIntent, RESULT_OK);
 			break;
 		case R.menu.download:
-			Toast.makeText(context, "Download clicked", Toast.LENGTH_SHORT).show();
+			//Toast.makeText(context, "Download clicked", Toast.LENGTH_SHORT).show();
+			AMElements aem = new AMElements(context);
+			aem.onDownloadClick();
 		}
 		return super.onMenuItemSelected(featureId, item);
 	}
+	
+	
 
 	/*
 	 * @see установить слушателя на результат вызова страницы "добавить новый отчет"
