@@ -86,12 +86,14 @@ public final class R {
         public static final int photo_choosed=0x7f020014;
         public static final int photo_icon=0x7f020015;
         public static final int photo_not_choosed=0x7f020016;
-        public static final int state_icon=0x7f020017;
-        public static final int state_report_choosed=0x7f020018;
-        public static final int state_report_not_choosed=0x7f020019;
-        public static final int transperent=0x7f02001a;
-        public static final int trash_choosed=0x7f02001b;
-        public static final int trash_not_choosed=0x7f02001c;
+        public static final int selector_photo=0x7f020017;
+        public static final int selector_trash=0x7f020018;
+        public static final int state_icon=0x7f020019;
+        public static final int state_report_choosed=0x7f02001a;
+        public static final int state_report_not_choosed=0x7f02001b;
+        public static final int transperent=0x7f02001c;
+        public static final int trash_choosed=0x7f02001d;
+        public static final int trash_not_choosed=0x7f02001e;
     }
     public static final class error {
         public static final int cancel=0x7f130002;

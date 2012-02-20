@@ -36,20 +36,18 @@
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                 >
+                android:layout_height="fill_parent" >
 
                 <ImageView
                     android:id="@+photoedit/photo1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true" />
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                 >
+                android:layout_height="fill_parent" >
 
                 <ImageView
                     android:id="@+photoedit/photo2"
@@ -67,21 +65,31 @@
             android:paddingBottom="10dp"
             android:paddingTop="10dp" >
 
-            <ImageView
-                android:onClick="rewriteImage"
-                android:id="@+photoedit/rewrite"
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingRight="15dp"
-                android:src="@drawable/photo_not_choosed" />
+                android:paddingRight="20dp" >
 
-            <ImageView
-                android:onClick="deleteImage"
-                android:id="@+photoedit/delete"
+                <ImageView
+                    android:id="@+photoedit/rewrite"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="rewriteImage"
+                    android:background="@drawable/selector_photo" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="15dp"
-                android:src="@drawable/trash_not_choosed" />
+                android:paddingLeft="20dp" >
+
+                <ImageView
+                    android:id="@+photoedit/delete"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/selector_trash"
+                    android:onClick="deleteImage" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
